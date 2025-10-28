@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kiosk Info</title>
+  <style>
+    /* ---------- Global Reset ---------- */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Inter", Arial, sans-serif;
+    }
+
+    body {
+      background: #f5f7fa;
+      color: #222;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      padding: 40px 20px;
+    }
+
+    /* ---------- Card Container ---------- */
+    .container {
+      background: #fff;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+      border-radius: 16px;
+      padding: 30px 40px;
+      max-width: 800px;
+      width: 100%;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 30px;
+      color: #111;
+      font-weight: 600;
+    }
+
+    section {
+      margin-bottom: 40px;
+    }
+
+    h2 {
+      font-size: 1.5rem;
+      border-left: 5px solid #0078d7;
+      padding-left: 10px;
+      margin-bottom: 20px;
+      color: #0078d7;
+    }
+
+    /* ---------- Pricing Table ---------- */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 1rem;
+    }
+
+    th, td {
+      padding: 12px 10px;
+      text-align: left;
+    }
+
+    th {
+      background-color: #0078d7;
+      color: #fff;
+    }
+
+    tr:nth-child(even) td {
+      background-color: #f0f4f9;
+    }
+
+    tr:hover td {
+      background-color: #e6f0ff;
+    }
+
+    /* ---------- Footer ---------- */
+    footer {
+      margin-top: 20px;
+      text-align: center;
+      font-size: 0.9rem;
+      color: #777;
+    }
+
+    /* ---------- Responsive ---------- */
+    @media (max-width: 600px) {
+      body {
+        padding: 20px 10px;
+      }
+      .container {
+        padding: 20px;
+      }
+      h1 {
+        font-size: 1.8rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>☕ Small Kiosk</h1>
+
+    <section id="pricing">
+      <h2>Pricing List</h2>
+      <table>
+        <tr>
+          <th>Item</th>
+          <th>Price</th>
+        </tr>
+        <tr>
+          <td>Espresso</td>
+          <td>$2.50</td>
+        </tr>
+        <tr>
+          <td>Cappuccino</td>
+          <td>$3.50</td>
+        </tr>
+        <tr>
+          <td>Sandwich</td>
+          <td>$4.00</td>
+        </tr>
+        <tr>
+          <td>Muffin</td>
+          <td>$2.00</td>
+        </tr>
+        <tr>
+          <td>Water Bottle</td>
+          <td>$1.50</td>
+        </tr>
+      </table>
+    </section>
+
+    <section id="hours">
+      <h2>Opening Hours</h2>
+      <table>
+        <tr>
+          <th>Day</th>
+          <th>Status / Hours</th>
+        </tr>
+        <tr>
+          <td>Monday</td>
+          <td>8:00 AM – 2:00 PM (First Break)</td>
+        </tr>
+        <tr>
+          <td>Tuesday</td>
+          <td>8:00 AM – 3:00 PM</td>
+        </tr>
+        <tr>
+          <td>Wednesday</td>
+          <td>8:00 AM – 3:00 PM</td>
+        </tr>
+        <tr>
+          <td>Thursday</td>
+          <td>Closed</td>
+        </tr>
+        <tr>
+          <td>Friday</td>
+          <td>8:00 AM – 1:00 PM</td>
+        </tr>
+      </table>
+    </section>
+
+    <footer>
+      &copy; 2025 Small Kiosk • Made with ❤️ for our customers
+    </footer>
+  </div>
+</body>
+</html>
