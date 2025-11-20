@@ -2,171 +2,185 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Kiosk</title>
+  <title>Caro Kiosk</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
-    /* ---------- Global Reset ---------- */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: "Inter", Arial, sans-serif;
-    }
-
     body {
-      background: #f5f7fa;
-      color: #222;
+      background: linear-gradient(135deg, #191e33 0%, #05205a 100%);
+      color: #f4eefc;
+      font-family: 'Segoe UI', Arial, sans-serif;
+      margin: 0;
+      min-height: 100vh;
       display: flex;
       flex-direction: column;
       align-items: center;
-      min-height: 100vh;
-      padding: 40px 20px;
+      justify-content: flex-start;
     }
-
-    /* ---------- Card Container ---------- */
-    .container {
-      background: #fff;
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-      border-radius: 16px;
-      padding: 30px 40px;
-      max-width: 800px;
-      width: 100%;
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 32px;
+      margin-bottom: 12px;
     }
-
-    h1 {
-      text-align: center;
-      margin-bottom: 30px;
-      color: #111;
-      font-weight: 600;
+    .logo-link {
+      display: inline-block;
+      margin-right: 18px;
+      cursor: pointer;
+      border: none;
+      background: none;
+      padding: 0;
+      outline: none;
     }
-
-    section {
-      margin-bottom: 40px;
+    .logo-link svg { transition: box-shadow 0.2s; }
+    .logo-link:active svg, .logo-link:focus svg {
+      box-shadow: 0 2px 10px #275bff99;
     }
-
-    h2 {
-      font-size: 1.5rem;
-      border-left: 5px solid #0078d7;
-      padding-left: 10px;
-      margin-bottom: 20px;
-      color: #0078d7;
+    .title {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #59a2ff;
+      text-shadow: 0 3px 16px #102044b2;
     }
-
-    /* ---------- Pricing Table ---------- */
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      font-size: 1rem;
+    .menu {
+      display: flex;
+      justify-content: center;
+      gap: 18px;
+      margin-top: 10px;
+      margin-bottom: 36px;
+      flex-wrap: wrap;
     }
-
-    th, td {
-      padding: 12px 10px;
-      text-align: left;
-    }
-
-    th {
-      background-color: #0078d7;
+    .menu-btn {
+      background: linear-gradient(95deg, #2637a6 0%, #59a2ff 100%);
+      border: none;
       color: #fff;
+      font-size: 1.07rem;
+      padding: 15px 36px;
+      border-radius: 9px;
+      font-weight: 600;
+      letter-spacing: 0.03em;
+      cursor: pointer;
+      box-shadow: 0 3px 15px #15385577;
+      transition: background 0.19s, color 0.19s;
+      margin: 0 6px 9px 6px;
     }
-
-    tr:nth-child(even) td {
-      background-color: #f0f4f9;
+    .menu-btn:hover, .menu-btn:focus {
+      background: #ffd34b;
+      color: #192040;
     }
-
-    tr:hover td {
-      background-color: #e6f0ff;
+    .content {
+      background: rgba(28,34,56,0.87);
+      box-shadow: 0 4px 33px #010c1899;
+      border-radius: 14px;
+      max-width: 520px;
+      width: 96vw;
+      padding: 30px 23px 15px 23px;
+      margin-bottom: 28px;
+      margin-top: -11px;
     }
-
-    /* ---------- Footer ---------- */
-    footer {
-      margin-top: 20px;
-      text-align: center;
-      font-size: 0.9rem;
-      color: #777;
+    .footer {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.98rem;
+      color: #f4e49c;
+      background: rgba(28, 34, 56, 0.74);
+      padding-bottom: 30px;
+      padding-top: 10px;
+      border-radius: 0 0 16px 16px;
     }
-
-    /* ---------- Responsive ---------- */
-    @media (max-width: 600px) {
-      body {
-        padding: 20px 10px;
-      }
-      .container {
-        padding: 20px;
-      }
-      h1 {
-        font-size: 1.8rem;
-      }
+    .footer-section {
+      margin: 7px 0;
+    }
+    .footer label {
+      color: #fe9562;
+      font-size: 1.03rem;
+      font-weight: 700;
+    }
+    @media (max-width: 650px) {
+      .header, .content { padding: 8px 4vw; }
+      .title { font-size: 1.28rem; }
+      .menu-btn { padding: 12px 8vw; font-size: 1.01rem; }
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <h1>Caro Kiosk</h1>
-
-    <section id="pricing">
-      <h2>Pricing List</h2>
-      <table>
-        <tr>
-          <th>Item</th>
-          <th>Price</th>
-        </tr>
-        <tr>
-          <td>Toasty</td>
-          <td>2.50€</td>
-        </tr>
-        <tr>
-          <td>breadroll</td>
-          <td>2.00€</td>
-        </tr>
-        <tr>
-          <td>Juce</td>
-          <td>2.00€</td>
-        </tr>
-        <tr>
-          <td>Muffin</td>
-          <td>2.00€</td>
-        </tr>
-        <tr>
-          <td>Water Bottle</td>
-          <td>1.50€</td>
-        </tr>
-      </table>
-    </section>
-
-    <section id="hours">
-      <h2>Opening Hours</h2>
-      <table>
-        <tr>
-          <th>Day</th>
-          <th>Status / Hours</th>
-        </tr>
-        <tr>
-          <td>Monday</td>
-          <td>9:30 AM – 9:45 AM (First Break)</td>
-        </tr>
-        <tr>
-          <td>Tuesday</td>
-          <td>11:20 AM – 12:55 AM</td>
-        </tr>
-        <tr>
-          <td>Wednesday</td>
-          <td>Closed</td>
-        </tr>
-        <tr>
-          <td>Thursday</td>
-          <td>Closed</td>
-        </tr>
-        <tr>
-          <td>Friday</td>
-          <td>11:20 AM – 12:55 AM</td>
-        </tr>
-      </table>
-    </section>
-
-    <footer>
-      &copy; 2025 Small Kiosk • Made with 🍪 for our customers
-    </footer>
-  </footer> By AirPath144 </footer>
+  <div class="header">
+    <!-- Clickable Blue 'C' Logo SVG -->
+    <a href="index.html" class="logo-link" title="Back to Home">
+      <svg width="62" height="62" viewBox="0 0 62 62" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M57 31A26 26 0 1 1 31 5" stroke="#59a2ff" stroke-width="13" fill="none" stroke-linecap="round"/>
+        <!-- Center gradient dot: yellow, orange, red -->
+        <defs>
+          <radialGradient id="dotgrad" cx="0.5" cy="0.5" r="0.6">
+            <stop offset="0%" stop-color="#fffcd4"/>
+            <stop offset="50%" stop-color="#ffe14b"/>
+            <stop offset="75%" stop-color="#ff994e"/>
+            <stop offset="100%" stop-color="#e54f42"/>
+          </radialGradient>
+        </defs>
+        <circle cx="31" cy="31" r="7.6" fill="url(#dotgrad)" />
+        <ellipse cx="31" cy="31" rx="12" ry="12" fill="url(#dotgrad)" fill-opacity="0.25"/>
+      </svg>
+    </a>
+    <div class="title">Caro Kiosk</div>
   </div>
+
+  <div class="menu">
+    <button class="menu-btn" onclick="showSection('newspaper')">Newspaper</button>
+    <button class="menu-btn" onclick="showSection('prices')">Prices</button>
+    <button class="menu-btn" onclick="showSection('hours')">Opening Hours</button>
+  </div>
+
+  <div class="content" id="main-content">
+    <div id="newspaper" style="display:none;">
+      <h2 style="color:#59a2ff;">Today's Newspaper</h2>
+      <p>Stay updated with the latest headlines, local news, and kiosk announcements.</p>
+    </div>
+    <div id="prices" style="display:none;">
+      <h2 style="color:#ebb34b;">Prices</h2>
+      <p>Discover our competitive prices on fresh snacks, drinks, magazines, and daily essentials.</p>
+      <ul>
+        <li>Sandwich: €2.50</li>
+        <li>Coffee: €1.80</li>
+        <li>Newspapers: €1.20</li>
+      </ul>
+    </div>
+    <div id="hours" style="display:none;">
+      <h2 style="color:#fabd2f;">Opening Hours</h2>
+      <p>
+        Monday–Friday: <strong>07:00–19:00</strong> <br>
+        Saturday: <strong>08:30–16:00</strong> <br>
+        Sunday: <strong>Closed</strong>
+      </p>
+    </div>
+    <div id="default">
+      <h2 style="color:#59a2ff;">Welcome to Caro Kiosk!</h2>
+      <p>Choose a menu option above to see more information or browse today's offerings.</p>
+    </div>
+  </div>
+
+  <div class="footer">
+    <div class="footer-section">
+      <label>About us</label>  
+      <div>Caro Kiosk is your trusted local spot for news, refreshments, and friendly service in town.</div>
+    </div>
+    <div class="footer-section">
+      <label>License</label>
+      <div>This kiosk website and logo design © 2025 Caro Kiosk. All rights reserved.</div>
+    </div>
+  </div>
+  <script>
+    // Simple menu functionality
+    function showSection(section) {
+      const sections = ['newspaper', 'prices', 'hours', 'default'];
+      sections.forEach(id => document.getElementById(id).style.display = 'none');
+      document.getElementById(section).style.display = 'block';
+    }
+    // Default view
+    showSection('default');
+  </script>
 </body>
 </html>
