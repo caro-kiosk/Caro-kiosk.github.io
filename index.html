@@ -79,48 +79,23 @@
       outline: none;
       box-shadow: 0 9px 36px #2681fc33;
     }
-    .footer {
+    /* Minimal footer styles */
+    .site-footer {
       width: 100%;
-      max-width: 480px;
-      background: #161c33;
-      color: #fabd2f;
-      border-radius: 0 0 16px 16px;
-      box-shadow: 0 0 22px #19356388 inset;
-      font-size: 1.08rem;
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      align-items: flex-start;
-      padding: 18px 18px 36px 18px;
+      text-align: center;
+      color: #7c8cae;
+      font-size: 0.98rem;
+      padding: 12px 0 10px 0;
       margin-top: auto;
-    }
-    .footer label {
-      display: block;
-      font-weight: 700;
-      margin-bottom: 4px;
-      color: #ffe14b;
-      font-size: 1.07rem;
-    }
-    .footer a {
-      color: #59a2ff;
       background: none;
-      text-decoration: none;
-      font-weight: 600;
-      border-bottom: 2px solid transparent;
-      padding-bottom: 2px;
-      font-size: 1rem;
-      transition: border-color 0.18s, color 0.18s;
-      cursor: pointer;
-    }
-    .footer a:hover, .footer a:focus {
-      border-color: #59a2ff;
-      color: #fff;
-      outline: none;
+      box-shadow: none;
+      border: none;
+      letter-spacing: 0;
     }
     @media (max-width: 600px) {
       .title {font-size: 1.38rem;}
       .menu-btn {font-size: 1.05rem; padding: 16px; border-radius: 11px;}
-      .footer {font-size: 0.99rem; padding: 14px 4vw 20px 4vw;}
+      .site-footer {font-size: 0.91rem; padding: 10px 0 7px 0;}
     }
   </style>
 </head>
@@ -151,15 +126,8 @@
     <a href="opening-hours.html" class="menu-btn" role="button">Opening Hours</a>
   </nav>
 
-  <footer class="footer">
-    <div>
-      <label></label>
-      <a href="about.html">About us</a>
-    </div>
-    <div>
-      <label></label>
-      <a href="license.html">License</a>
-    </div>
+  <footer class="site-footer">
+    &copy; 2025 Caro Kiosk — All rights reserved.
   </footer>
 </body>
 </html>
