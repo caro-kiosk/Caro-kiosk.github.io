@@ -4,11 +4,12 @@
   <meta charset="UTF-8" />
   <title>Caro Kiosk</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
   <style>
     body {
-      background: linear-gradient(135deg, #191e33 0%, #05205a 100%);
-      color: #f4eefc;
-      font-family: 'Segoe UI', Arial, sans-serif;
+      background: linear-gradient(135deg, #101626 0%, #042453 100%);
+      color: #f5f5ff;
+      font-family: 'Inter', Arial, sans-serif;
       margin: 0;
       min-height: 100vh;
       display: flex;
@@ -21,149 +22,143 @@
       align-items: center;
       justify-content: center;
       margin-top: 32px;
-      margin-bottom: 18px;
+      margin-bottom: 20px;
     }
     .logo-link {
       display: inline-block;
-      margin-right: 22px;
+      margin-right: 24px;
       cursor: pointer;
       border: none;
       background: none;
       padding: 0;
       outline: none;
+      vertical-align: middle;
     }
-    .logo-link svg { transition: box-shadow 0.2s; }
+    .logo-link svg { transition: box-shadow 0.18s; }
     .logo-link:active svg, .logo-link:focus svg {
       box-shadow: 0 2px 10px #275bff99;
     }
     .title {
-      font-size: 2.2rem;
-      font-weight: 700;
+      font-size: 2.3rem;
+      font-weight: 800;
       color: #59a2ff;
-      text-shadow: 0 3px 16px #102044b2;
+      text-shadow: 0 3px 18px #15254d77;
+      letter-spacing: 0.06em;
+      vertical-align: middle;
     }
     .menu {
       width: 100%;
-      max-width: 500px;
+      max-width: 480px;
       display: flex;
       flex-direction: column;
-      gap: 20px;
-      margin-bottom: 40px;
+      gap: 24px;
+      margin-bottom: 46px;
     }
     .menu-btn {
-      background-color: #10376a;
-      border: none;
-      color: white;
-      font-size: 1.4rem;
-      padding: 20px;
-      border-radius: 12px;
+      background: linear-gradient(90deg, #112054 0%, #214091 80%);
+      border: 2px solid #131526;
+      color: #e6f0ff;
+      font-size: 1.42rem;
+      padding: 24px;
+      border-radius: 16px;
       font-weight: 700;
       cursor: pointer;
-      box-shadow: 0 5px 15px #051c3e99;
-      transition: background-color 0.25s ease;
       width: 100%;
+      box-shadow: 0 7px 21px #051c3e39;
       text-align: center;
-      letter-spacing: 0.05em;
+      letter-spacing: 0.04em;
+      transition: background 0.2s, color 0.2s;
+      text-decoration: none;
+      margin: 0;
       user-select: none;
+      display: block;
     }
     .menu-btn:hover, .menu-btn:focus {
-      background-color: #3763d6;
-      box-shadow: 0 8px 20px #143f91bb;
+      background: #1d2773;
+      color: #fff;
       outline: none;
+      box-shadow: 0 9px 36px #2681fc33;
     }
     .footer {
       width: 100%;
-      max-width: 500px;
-      padding: 20px 12px 30px 12px;
-      background: rgba(28, 34, 56, 0.74);
-      color: #f4e49c;
+      max-width: 480px;
+      background: #161c33;
+      color: #fabd2f;
       border-radius: 0 0 16px 16px;
-      box-shadow: 0 0 22px #193563bb inset;
-      font-size: 1.05rem;
+      box-shadow: 0 0 22px #19356388 inset;
+      font-size: 1.08rem;
       display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      gap: 16px;
+      flex-direction: column;
+      gap: 12px;
+      align-items: flex-start;
+      padding: 18px 18px 36px 18px;
+      margin-top: auto;
     }
-    .footer a {
-      color: #82b1ff;
-      text-decoration: none;
-      font-weight: 600;
-      border-bottom: 1px solid transparent;
-      transition: border-color 0.2s;
-    }
-    .footer a:hover, .footer a:focus {
-      border-bottom-color: #82b1ff;
-      outline: none;
-    }
-    .footer-section {
-      flex: 1 1 45%;
-      min-width: 200px;
-    }
-    .footer-section label {
+    .footer label {
       display: block;
       font-weight: 700;
-      margin-bottom: 6px;
-      color: #fabd2f;
+      margin-bottom: 4px;
+      color: #ffe14b;
+      font-size: 1.07rem;
+    }
+    .footer a {
+      color: #59a2ff;
+      background: none;
+      text-decoration: none;
+      font-weight: 600;
+      border-bottom: 2px solid transparent;
+      padding-bottom: 2px;
+      font-size: 1rem;
+      transition: border-color 0.18s, color 0.18s;
+      cursor: pointer;
+    }
+    .footer a:hover, .footer a:focus {
+      border-color: #59a2ff;
+      color: #fff;
+      outline: none;
     }
     @media (max-width: 600px) {
-      .header {
-        margin-bottom: 24px;
-      }
-      .title {
-        font-size: 1.6rem;
-      }
-      .menu-btn {
-        font-size: 1.2rem;
-        padding: 16px;
-      }
-      .footer {
-        font-size: 0.95rem;
-        flex-direction: column;
-        align-items: flex-start;
-      }
-      .footer-section {
-        flex: 1 1 100%;
-        min-width: auto;
-      }
+      .title {font-size: 1.38rem;}
+      .menu-btn {font-size: 1.05rem; padding: 16px; border-radius: 11px;}
+      .footer {font-size: 0.99rem; padding: 14px 4vw 20px 4vw;}
     }
   </style>
 </head>
 <body>
   <div class="header">
-    <!-- Clickable Blue 'C' Logo -->
+    <!-- Clickable Blue 'C' Logo SVG -->
     <a href="index.html" class="logo-link" title="Back to Home">
-      <svg width="62" height="62" viewBox="0 0 62 62" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Caro Kiosk Logo">
-        <path d="M57 31A26 26 0 1 1 31 5" stroke="#59a2ff" stroke-width="13" fill="none" stroke-linecap="round"/>
+      <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Caro Kiosk Logo">
+        <path d="M59 32A27 27 0 1 1 32 5" stroke="#59a2ff" stroke-width="14" fill="none" stroke-linecap="round"/>
         <defs>
           <radialGradient id="dotgrad" cx="0.5" cy="0.5" r="0.6">
             <stop offset="0%" stop-color="#fffcd4"/>
-            <stop offset="50%" stop-color="#ffe14b"/>
+            <stop offset="49%" stop-color="#ffe14b"/>
             <stop offset="75%" stop-color="#ff994e"/>
             <stop offset="100%" stop-color="#e54f42"/>
           </radialGradient>
         </defs>
-        <circle cx="31" cy="31" r="7.6" fill="url(#dotgrad)" />
-        <ellipse cx="31" cy="31" rx="12" ry="12" fill="url(#dotgrad)" fill-opacity="0.25"/>
+        <circle cx="32" cy="32" r="9" fill="url(#dotgrad)" />
+        <ellipse cx="32" cy="32" rx="14" ry="14" fill="url(#dotgrad)" fill-opacity="0.21"/>
       </svg>
     </a>
     <div class="title">Caro Kiosk</div>
   </div>
 
-  <nav class="menu" role="navigation" aria-label="Main Menu">
+  <nav class="menu" aria-label="Main Menu">
     <a href="newspaper.html" class="menu-btn" role="button">Newspaper</a>
-    <a href="dashboard.html" class="menu-btn" role="button">Prices</a>
+    <a href="prices.html" class="menu-btn" role="button">Prices</a>
     <a href="opening-hours.html" class="menu-btn" role="button">Opening Hours</a>
   </nav>
 
   <footer class="footer">
-    <div class="footer-section">
-      <a href="about.html" tabindex="0">About us</a>
+    <div>
+      <label>About us</label>
+      <a href="about.html">Learn more about Caro Kiosk</a>
     </div>
-  </footer>
-  <footer>
-    <div class="footer-section">
-      <a href="license.html" tabindex="0">License</a>
+    <div>
+      <label>License</label>
+      <a href="license.html">View license information</a>
     </div>
   </footer>
 </body>
