@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Opening Hours – Caro Kiosk</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      background: linear-gradient(135deg, #101626 0%, #173159 100%);
+      color: #f5f5ff;
+      font-family: 'Inter', Arial, sans-serif;
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .container {
+      max-width: 420px;
+      width: 96%;
+      background: #161e33;
+      border-radius: 13px;
+      margin: 54px 0 35px 0;
+      padding: 37px 20px 26px 20px;
+      box-shadow: 0 10px 40px #04205a55;
+      text-align: center;
+    }
+    h1 {
+      font-size: 2rem;
+      color: #59a2ff;
+      margin-bottom: 23px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 12px;
+    }
+    th, td {
+      padding: 13px 8px;
+      font-size: 1.07rem;
+    }
+    tr {
+      border-bottom: 1.5px solid #232748;
+    }
+    th {
+      color: #a7cdfc;
+      font-weight: 700;
+      text-align: left;
+      background: none;
+      border-bottom: 2.5px solid #24326c;
+    }
+    td {
+      color: #ecf2ff;
+      text-align: left;
+    }
+    .closed {
+      color: #e27952;
+      font-weight: 700;
+    }
+    .back-link {
+      color: #59a2ff;
+      display: block;
+      margin: 14px auto 0 0;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1.04rem;
+      text-align: left;
+    }
+    .back-link:hover { text-decoration: underline;}
+    @media (max-width:600px){
+      h1 {font-size:1.17rem;}
+      .container {padding:15px 2vw;}
+      th, td {font-size:.93rem;}
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <a href="index.html" class="back-link">&larr; Back to homepage</a>
+    <h1>Opening Hours</h1>
+    <table>
+      <tr>
+        <th>Day</th>
+        <th>Hours</th>
+      </tr>
+      <tr>
+        <td>Monday – Friday</td>
+        <td>07:00 – 19:00</td>
+      </tr>
+      <tr>
+        <td>Saturday</td>
+        <td>08:30 – 16:00</td>
+      </tr>
+      <tr>
+        <td>Sunday</td>
+        <td class="closed">Closed</td>
+      </tr>
+    </table>
+  </div>
+</body>
+</html>
