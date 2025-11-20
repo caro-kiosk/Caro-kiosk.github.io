@@ -9,7 +9,7 @@
     body {
       margin: 0;
       min-height: 100vh;
-      background: linear-gradient(135deg, #101626 0%, #042453 100%);
+      background: linear-gradient(135deg, #101626 0%, #06203e 100%);
       color: #eaf0ff;
       font-family: 'Inter', Arial, sans-serif;
       display: flex;
@@ -21,41 +21,59 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding: 40px 18px;
+      padding: 44px 18px;
       max-width: 480px;
+      position: relative;
     }
     .error-graphic {
-      margin-bottom: 30px;
-    }
-    .error-graphic svg {
-      width: 180px;
+      margin-bottom: 16px;
+      width: 250px;
       max-width: 90vw;
-      display: block;
+      position: relative;
+    }
+    .error-warning {
+      background: linear-gradient(90deg,#ff3232 20%,#d80000 100%);
+      color: #fff;
+      font-size: 1.16rem;
+      font-weight: 700;
+      border-radius: 7px;
+      padding: 8px 15px;
+      box-shadow: 0 2px 12px #b0001b37;
+      margin-bottom: 22px;
+      letter-spacing: 0.01em;
+      text-align: center;
+      position: relative;
+      z-index: 10;
+      animation: blinkError 1.5s steps(2) infinite;
+    }
+    @keyframes blinkError {
+      0%,60% { opacity: 1;}
+      70%,100% { opacity: 0.67;}
     }
     h1 {
-      font-size: 2.5rem;
-      line-height: 1.1;
-      margin: 0 0 12px 0;
+      font-size: 2.15rem;
+      margin: 0 0 10px 0;
       color: #59a2ff;
       font-weight: 800;
+      text-shadow: 0 3px 18px #15254d55;
     }
     p {
-      font-size: 1.22rem;
+      font-size: 1.1rem;
       color: #ffe14b;
-      margin: 0 0 32px 0;
+      margin: 0 0 24px 0;
       text-align: center;
     }
     a.back-btn {
       background: #122451;
       color: #eaf0ff;
-      padding: 18px 44px;
-      border-radius: 14px;
+      padding: 15px 38px;
+      border-radius: 13px;
       text-decoration: none;
-      font-size: 1.15rem;
+      font-size: 1.08rem;
       font-weight: 700;
       margin-top: 18px;
-      box-shadow: 0 3px 19px #02103439;
-      transition: background 0.18s;
+      box-shadow: 0 2px 9px #02103433;
+      transition: background 0.18s, color 0.18s;
       display: inline-block;
     }
     a.back-btn:hover,
@@ -64,34 +82,49 @@
       color: #101626;
       outline: none;
     }
-    @media (max-width:500px){
-      h1 {font-size: 1.6rem;}
-      .container {padding: 12px 2vw;}
-      a.back-btn {font-size: 1rem; padding: 13px 12vw;}
+    @media (max-width:530px){
+      h1 {font-size: 1.23rem;}
+      .container {padding: 10px 1vw;}
+      a.back-btn {font-size: 0.96rem; padding: 9px 7vw;}
+      .error-warning {font-size: .98rem; padding: 6px 2vw;}
+      .error-graphic{width:170px;}
     }
   </style>
 </head>
 <body>
   <div class="container">
     <div class="error-graphic" aria-hidden="true">
-      <!-- Simple SVG illustration with kiosk/cat vibe, quick load -->
-      <svg viewBox="0 0 140 100" fill="none">
-        <!-- Large C for branding -->
-        <path d="M120 52A48 48 0 1 1 70 4" stroke="#59a2ff" stroke-width="12" fill="none" stroke-linecap="round"/>
-        <!-- Lost document/cat paw -->
-        <ellipse cx="98" cy="74" rx="13" ry="7.5" fill="#ffe14b"/>
-        <ellipse cx="91" cy="67" rx="3.7" ry="3.1" fill="#ffe14b"/>
-        <ellipse cx="104" cy="65" rx="3" ry="2.3" fill="#ffe14b"/>
-        <ellipse cx="108" cy="70" rx="2.3" ry="1.6" fill="#ffe14b"/>
-        <!-- Magnifier glass hint / error theme -->
-        <circle cx="48" cy="84" r="13" fill="#59a2ff" fill-opacity="0.18"/>
-        <rect x="55" y="91" width="18" height="4" rx="2" fill="#59a2ff" opacity="0.4"/>
+      <!-- 3D-inspired C with fallen dot, gradients, and shadow -->
+      <svg viewBox="0 0 210 122" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- C shadow on "site surface" -->
+        <ellipse cx="85" cy="100" rx="63" ry="14" fill="#0a1743" opacity="0.29"/>
+        <!-- 3D Styled C, thick blue strokes with gradients and highlights -->
+        <defs>
+          <radialGradient id="blue3dC" cx="0.6" cy="0.42" r="0.75">
+            <stop offset="0%" stop-color="#b8e7ff"/>
+            <stop offset="42%" stop-color="#59a2ff"/>
+            <stop offset="90%" stop-color="#164ab3"/>
+            <stop offset="100%" stop-color="#15327e"/>
+          </radialGradient>
+        </defs>
+        <path d="M142,65a52,52,0,1,1-32-60"
+              fill="none"
+              stroke="url(#blue3dC)"
+              stroke-width="19"
+              stroke-linecap="round"/>
+        <!-- Shiny Highlight -->
+        <path d="M135,65a45,45,0,1,1-28-53" fill="none" stroke="#fff" stroke-opacity="0.18" stroke-width="6.5" stroke-linecap="round"/>
+        <!-- The dot (detached), laying "on the ground" with 3D shadow and highlight, colored red -->
+        <ellipse cx="170" cy="85" rx="15" ry="9" fill="#e21c32"/>
+        <ellipse cx="170" cy="95" rx="11" ry="3.9" fill="#6a000d" opacity="0.26"/>
+        <ellipse cx="170" cy="85" rx="5.5" ry="3.1" fill="#fff" opacity="0.19"/>
       </svg>
     </div>
+    <div class="error-warning">Read Error: Could not retrieve page!</div>
     <h1>404 – Page Not Found</h1>
     <p>
-      Oops, it looks like this page wandered off!<br>
-      Let’s return to safer ground.
+      The page seems to have rolled away.<br>
+      Let’s head safely back home!
     </p>
     <a href="index.html" class="back-btn">Back to Home</a>
   </div>
