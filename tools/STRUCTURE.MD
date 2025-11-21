@@ -1,1 +1,7 @@
-
+#WEBSITE STRUCTURE
+|
+|---index.html
+|
+|
+|
+|
