@@ -1,0 +1,435 @@
+<!doctype html>
+<html lang="en" data-theme="winter">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>AirPath Hub – Dev Dashboard</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg-a:#071022;
+  --accent-start:#3b82f6;
+  --accent-mid:#8b5cf6;
+  --accent-end:#7c3aed;
+  --muted:rgba(255,255,255,0.76);
+  --content-max-width:1050px;
+  --radius:14px;
+  --shadow-strong:0 18px 45px rgba(2,6,23,0.6);
+  --loader-height:4px;
+  --todo-start:#06b6d4; --todo-end:#7c3aed;
+  --inprog-start:#06b6d4; --inprog-end:#7c3aed;
+  --whidghed-start:#f97316; --whidghed-end:#facc15;
+}
+
+html[data-theme="winter"]{
+  --bg-a:#071227;
+  --accent-start:#9be7ff; --accent-mid:#81d4ff; --accent-end:#bfeeff;
+  --muted:rgba(230,245,255,0.78);
+  --todo-start:#bfeeff; --todo-end:#81d4ff;
+  --inprog-start:#9be7ff; --inprog-end:#bfeeff;
+}
+
+*{box-sizing:border-box}
+html,body{
+  width:100vw;height:100%;margin:0;padding:0;overflow-x:hidden;touch-action:pan-y;
+  background-color:var(--bg-a);font-family:Inter,system-ui,Segoe UI,Roboto,Arial;color:var(--muted);
+  -webkit-font-smoothing:antialiased;
+}
+h1{font-size:clamp(18px,2.2vw,24px);margin:0}
+p,.muted{font-size:clamp(13px,1.2vw,15px)}
+
+.top-loader{position:fixed;left:0;top:0;width:100%;height:var(--loader-height);z-index:9999;pointer-events:none}
+.top-loader .bar{height:100%;width:0;background:linear-gradient(90deg,var(--accent-start),var(--accent-mid),var(--accent-end));transition:width 180ms ease-out;position:relative;overflow:hidden;transform:translateZ(0);will-change:width}
+.top-loader .bar::after{content:"";position:absolute;left:-40%;top:0;height:100%;width:40%;background:linear-gradient(90deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02), rgba(255,255,255,0.08));transform:skewX(-18deg);animation:shimmer 1.6s linear infinite}
+@keyframes shimmer{0%{left:-40%}100%{left:140%}}
+
+.dark-base{position:fixed;inset:0;background-color:var(--bg-a);z-index:-6;pointer-events:none}
+.background{position:fixed;inset:0;z-index:-5;pointer-events:none;overflow:hidden}
+.background .color{
+  position:absolute;left:50%;top:0;transform:translateX(-50%);
+  width:260vw;height:300vh;
+  background:
+    radial-gradient(40% 40% at 10% 20%, rgba(190,238,255,0.14), transparent 20%),
+    radial-gradient(30% 30% at 80% 75%, rgba(130,212,255,0.10), transparent 22%),
+    linear-gradient(110deg,var(--accent-start),var(--accent-mid),var(--accent-end));
+  background-size:300% 300%;
+  animation:bgShift 18s linear infinite;
+  mix-blend-mode:screen;
+  filter:contrast(1.06) saturate(1.08) brightness(1.02);
+  opacity:0.98;will-change:transform;transform:translateZ(0);
+}
+@keyframes bgShift{
+  0%{transform:translate(-50%,0)}
+  50%{transform:translate(-52%,0)}
+  100%{transform:translate(-50%,0)}
+}
+
+.background .blob{position:absolute;border-radius:50%;filter:blur(48px);opacity:0.52;mix-blend-mode:screen;pointer-events:none;left:50%;transform:translateX(-50%);will-change:transform}
+.background .blob.a{width:820px;height:820px;top:-22%;transform:translateX(-34%);background:radial-gradient(circle at 30% 30%, rgba(59,130,246,0.92), rgba(59,130,246,0.5) 36%, transparent 68%)}
+.background .blob.b{width:700px;height:700px;bottom:-18%;transform:translateX(36%);background:radial-gradient(circle at 70% 70%, rgba(124,58,237,0.92), rgba(124,58,237,0.48) 36%, transparent 68%);opacity:0.54}
+
+.viewport-frame{position:fixed;left:50%;top:20px;transform:translateX(-50%);width:calc(min(var(--content-max-width),100vw-40px));height:calc(100vh-40px);border-radius:18px;border:1px solid rgba(255,255,255,0.04);box-shadow:inset 0 0 0 1px rgba(255,255,255,0.01), 0 20px 50px rgba(2,6,23,0.6);z-index:-1;pointer-events:none;overflow:hidden}
+@media (max-width:860px){.viewport-frame{display:none}}
+
+.wrap{max-width:var(--content-max-width);margin:56px auto;padding:28px;position:relative;z-index:2}
+header{display:flex;align-items:center;justify-content:space-between;gap:16px}
+.brand{display:flex;gap:14px;align-items:center}
+
+/* GLITCHY C LOGO */
+.logo{
+  position:relative;
+  width:72px;
+  height:72px;
+  border-radius:16px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:radial-gradient(circle at 20% 20%, rgba(59,130,246,0.6), rgba(15,23,42,0.98));
+  border:1px solid rgba(148,163,184,0.5);
+  box-shadow:
+    0 0 0 1px rgba(15,23,42,0.9),
+    0 12px 30px rgba(15,23,42,0.9),
+    0 0 25px rgba(129,140,248,0.55);
+  overflow:hidden;
+}
+
+.logo-glitch .logo-c{
+  position:relative;
+  font-weight:900;
+  font-size:40px;
+  color:#e5edff;
+  letter-spacing:0.03em;
+  text-shadow:
+    0 0 8px rgba(129,140,248,0.9),
+    0 0 16px rgba(56,189,248,0.9);
+}
+
+.logo-glitch .glitch-layer{
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-52%);
+  mix-blend-mode:screen;
+  pointer-events:none;
+  opacity:0.75;
+}
+
+.logo-glitch .glitch-r{
+  color:#60a5fa;
+  text-shadow:-2px 0 rgba(59,130,246,0.9);
+  animation:logo-glitch-r 1.3s infinite steps(2,end);
+}
+
+.logo-glitch .glitch-b{
+  color:#a855f7;
+  text-shadow:2px 0 rgba(168,85,247,0.9);
+  animation:logo-glitch-b 1.1s infinite steps(2,end);
+}
+
+.logo-dot{
+  position:absolute;
+  width:12px;
+  height:12px;
+  border-radius:999px;
+  background:radial-gradient(circle, #f97316 0%, #fed7aa 45%, rgba(15,23,42,0) 80%);
+  box-shadow:
+    0 0 8px rgba(248,113,113,0.9),
+    0 0 18px rgba(251,146,60,0.95),
+    0 0 32px rgba(251,191,36,0.9);
+  left:50%;
+  top:50%;
+  transform:translate(-10px,-6px);
+}
+
+@keyframes logo-glitch-r{
+  0%,100%{transform:translate(-50%,-52%);clip-path:inset(0 0 0 0)}
+  10%{transform:translate(calc(-50% + 1px),-50%);clip-path:inset(10% 0 40% 0)}
+  22%{transform:translate(calc(-50% - 1px),-55%);clip-path:inset(60% 0 10% 0)}
+  35%{transform:translate(calc(-50% + 2px),-52%);clip-path:inset(30% 0 20% 0)}
+  55%{transform:translate(calc(-50% - 1px),-48%);clip-path:inset(5% 0 55% 0)}
+  75%{transform:translate(calc(-50% + 1px),-54%);clip-path:inset(45% 0 5% 0)}
+}
+
+@keyframes logo-glitch-b{
+  0%,100%{transform:translate(-50%,-52%);clip-path:inset(0 0 0 0)}
+  8%{transform:translate(calc(-50% - 2px),-50%);clip-path:inset(15% 0 35% 0)}
+  20%{transform:translate(calc(-50% + 1px),-56%);clip-path:inset(55% 0 15% 0)}
+  38%{transform:translate(calc(-50% - 1px),-49%);clip-path:inset(25% 0 25% 0)}
+  60%{transform:translate(calc(-50% + 2px),-53%);clip-path:inset(5% 0 60% 0)}
+  82%{transform:translate(calc(-50% - 1px),-51%);clip-path:inset(50% 0 10% 0)}
+}
+
+@media (prefers-reduced-motion:reduce){
+  .logo-glitch .glitch-layer{animation:none;opacity:0.9}
+}
+
+.controls{display:flex;gap:10px;align-items:center}
+
+.btn{display:inline-flex;gap:10px;align-items:center;padding:10px 14px;border-radius:12px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));color:#eaf3ff;text-decoration:none;font-weight:700;border:1px solid rgba(255,255,255,0.04);box-shadow:0 6px 18px rgba(2,6,23,0.5);transform:translateZ(0);transition:transform .18s ease}
+.btn:hover{transform:translateY(-4px);box-shadow:0 14px 36px rgba(3,7,23,0.5)}
+.btn.ghost{background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--muted)}
+.btn.full{display:block;width:100%;text-align:center;padding:14px 16px;border-radius:12px;box-sizing:border-box}
+
+.grid{display:grid;grid-template-columns:1fr 360px;gap:20px;margin-top:22px;align-items:start}
+@media (max-width:860px){.grid{grid-template-columns:1fr}.wrap{padding:18px}.logo{width:60px;height:60px}}
+
+.card{background:rgba(255,255,255,0.03);border-radius:var(--radius);padding:18px;border:1px solid rgba(255,255,255,0.04);box-shadow:var(--shadow-strong);transition:transform .28s cubic-bezier(.2,.9,.3,1), box-shadow .28s ease;transform-origin:top center;will-change:transform;contain:paint}
+.card:hover{transform:translateY(-8px);box-shadow:0 28px 80px rgba(2,6,23,0.78);border-color:rgba(255,255,255,0.06)}
+
+#progress-list{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:12px}
+.prog-item{display:flex;justify-content:space-between;align-items:center;padding:12px;border-radius:10px;background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.008));border:1px solid rgba(255,255,255,0.02);transition:transform .18s ease}
+.prog-item:hover{transform:translateY(-4px);box-shadow:0 10px 24px rgba(2,6,23,0.55)}
+.tag{font-size:12px;padding:6px 9px;border-radius:999px;color:white;font-weight:700;white-space:nowrap}
+.tag.done{background:linear-gradient(90deg,var(--accent-start),var(--accent-end))}
+.tag.inprogress{background:linear-gradient(90deg,var(--inprog-start),var(--inprog-end))}
+.tag.todo{background:linear-gradient(90deg,var(--todo-start),var(--todo-end))}
+.tag.whidghed{background:linear-gradient(90deg,var(--whidghed-start),var(--whidghed-end));color:#111827}
+
+.widget-wrap{display:flex;justify-content:center}
+.discord-widget{width:100%;max-width:360px;height:auto;border-radius:12px;overflow:hidden;border:0;box-shadow:0 20px 50px rgba(2,6,23,0.45);display:block;box-sizing:border-box}
+.discord-widget iframe{width:100%;height:clamp(340px,50vh,640px);display:block;border:0;box-sizing:border-box}
+
+footer{text-align:center;margin-top:22px;color:var(--muted);font-size:13px;display:block;padding-top:24px}
+footer .small-links{display:flex;gap:18px;justify-content:center;margin-top:12px}
+footer .small-links a{color:var(--muted);text-decoration:none;border-bottom:1px dashed rgba(255,255,255,0.04);padding-bottom:2px}
+
+.reveal{opacity:0;transform:translateY(10px) scale(.997);animation:revealIn .5s forwards;animation-delay:0.06s}
+.reveal.delay{animation-delay:0.12s}
+.reveal.long{animation-duration:.72s}
+@keyframes revealIn{to{opacity:1;transform:translateY(0) scale(1)}}
+
+.snow-wrap{position:fixed;inset:0;pointer-events:none;z-index:9998;overflow:hidden}
+.snowflake{
+  position:fixed;top:-10vh;left:0;width:10px;height:10px;background:transparent;color:var(--muted);
+  font-size:16px;filter:drop-shadow(0 2px 6px rgba(0,0,0,0.12));
+  animation:fall linear infinite;
+  will-change:transform,opacity;
+  opacity:0.95;
+}
+@keyframes fall{
+  0%{transform:translateY(-10vh) translateX(0) rotate(0deg);opacity:0}
+  5%{opacity:1}
+  100%{transform:translateY(120vh) translateX(60vw) rotate(360deg);opacity:1}
+}
+html:not([data-theme="winter"]) .snow-wrap{display:none}
+@media (max-width:640px){.snowflake{font-size:12px}}
+</style>
+</head>
+<body>
+  <div class="top-loader" aria-hidden="true">
+    <div class="bar" id="loaderBar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"></div>
+  </div>
+
+  <div class="dark-base" aria-hidden="true"></div>
+  <div class="background" aria-hidden="true">
+    <div class="color" aria-hidden="true"></div>
+    <div class="blob a" aria-hidden="true"></div>
+    <div class="blob b" aria-hidden="true"></div>
+  </div>
+
+  <div class="snow-wrap" id="snowWrap" aria-hidden="true"></div>
+  <div class="viewport-frame" aria-hidden="true"></div>
+
+  <div class="wrap" id="page" style="opacity:0">
+    <header class="reveal">
+      <div class="brand">
+        <div class="logo logo-glitch">
+          <span class="logo-c">C</span>
+          <span class="logo-c glitch-layer glitch-r">C</span>
+          <span class="logo-c glitch-layer glitch-b">C</span>
+          <span class="logo-dot"></span>
+        </div>
+        <div>
+          <h1>AirPath144 – Dev Dashboard</h1>
+          <p class="lead">Track status, TODOs, and Discord from one place.</p>
+        </div>
+      </div>
+      <div class="controls">
+        <a id="githubCta" class="btn" href="https://github.com/AirPathOnCode" target="_blank" rel="noreferrer">View my GitHub — AirPathOnCode</a>
+      </div>
+    </header>
+
+    <section class="grid">
+      <div class="reveal delay">
+        <div class="card">
+          <h3>Current status</h3>
+          <p class="muted">
+            Overall project status:
+            <span class="tag whidghed" style="margin-left:8px">whidghed</span>
+          </p>
+          <p class="muted" style="margin-top:10px">
+            This custom status is free for you to interpret however you like—rename or restyle it any time inside the CSS.
+          </p>
+        </div>
+
+        <div class="card" style="margin-top:16px">
+          <h3 style="margin-bottom:8px">Latest progress</h3>
+          <ul id="progress-list">
+            <li class="prog-item">
+              <div>
+                <div style="font-weight:700">2025-10-01 — Built responsive homepage UI</div>
+                <div class="muted" style="margin-top:6px">Clean layout and fixed UI/scrolling issues</div>
+              </div>
+              <div class="tag done">Done</div>
+            </li>
+
+            <li class="prog-item">
+              <div>
+                <div style="font-weight:700">2025-09-20 — Started learning Rust</div>
+                <div class="muted" style="margin-top:6px">Learning basics and small CLI tools</div>
+              </div>
+              <div class="tag inprogress">In progress</div>
+            </li>
+
+            <li class="prog-item">
+              <div>
+                <div style="font-weight:700">2025-09-05 — Complete this GitHub repo</div>
+                <div class="muted" style="margin-top:6px">Debug animations and polish layout</div>
+              </div>
+              <div class="tag todo">To do</div>
+            </li>
+
+            <li class="prog-item">
+              <div>
+                <div style="font-weight:700">2025-10-05 — Add wiki and templates</div>
+                <div class="muted" style="margin-top:6px">Docs and subpage templates for future projects</div>
+              </div>
+              <div class="tag todo">To do</div>
+            </li>
+          </ul>
+        </div>
+
+        <div class="card" style="margin-top:16px">
+          <h3 style="margin-bottom:8px">Developer TODO list</h3>
+          <ul id="todo-list" style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:10px">
+            <li class="prog-item">
+              <div>
+                <div style="font-weight:700">Connect AirPath provider code</div>
+                <div class="muted" style="margin-top:6px">Wire any backend / provider API once ready.</div>
+              </div>
+              <div class="tag whidghed">whidghed</div>
+            </li>
+            <li class="prog-item">
+              <div>
+                <div style="font-weight:700">Add deployment checklist</div>
+                <div class="muted" style="margin-top:6px">Document GitHub Pages steps and environment notes.</div>
+              </div>
+              <div class="tag todo">To do</div>
+            </li>
+            <li class="prog-item">
+              <div>
+                <div style="font-weight:700">Create more status tags</div>
+                <div class="muted" style="margin-top:6px">For example: blocked, review, experiment.</div>
+              </div>
+              <div class="tag inprogress">In progress</div>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <aside class="reveal long">
+        <div class="card">
+          <h4 style="margin-top:0">Discord widget</h4>
+          <p class="muted">Live server widget. If it appears blank, enable the Server Widget in your Discord server settings.</p>
+
+          <div class="widget-wrap" style="margin-top:12px">
+            <div class="discord-widget" id="discordWrap">
+              <iframe id="discordWidget" src="https://discord.com/widget?id=1432386695785091227&theme=dark" allowtransparency="true" frameborder="0" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts" allow="clipboard-write"></iframe>
+            </div>
+          </div>
+
+          <p class="small-note">Quick actions</p>
+          <div style="display:flex;flex-direction:column;gap:8px;margin-top:10px">
+            <a id="serverInviteBtn" class="btn full" href="https://discord.gg/YOUR_SERVER_INVITE" target="_blank" rel="noreferrer">Join my server</a>
+            <a id="discordWidgetLink" class="btn ghost" href="https://discord.com/channels/@me" target="_blank" rel="noreferrer">Open Discord</a>
+          </div>
+        </div>
+
+        <div class="card" style="margin-top:14px">
+          <h4 style="margin-top:0">How to use this dashboard</h4>
+          <p class="muted">
+            Edit the progress and TODO lists directly in <code>index.html</code>. Change <code>data-theme</code> on the <code>&lt;html&gt;</code> tag to switch between themes like <code>dark</code>, <code>purple</code>, or <code>winter</code>.
+          </p>
+          <p class="muted" style="margin-top:8px">
+            Deploy by pushing this file to the branch configured for GitHub Pages in your repository settings.
+          </p>
+        </div>
+      </aside>
+    </section>
+
+    <footer class="reveal" style="margin-top:36px">
+      Published with GitHub Pages • Edit <code>index.html</code> to update this developer dashboard.
+      <div class="small-links" style="margin-top:14px">
+        <a href="about.html">About me</a>
+        <a href="license.html">License</a>
+      </div>
+    </footer>
+  </div>
+
+<script>
+(function(){
+  const bar=document.getElementById('loaderBar');
+  let progress=0;
+  const step=()=>{
+    if(progress<60)progress+=Math.random()*7+6;
+    else if(progress<85)progress+=Math.random()*3+1;
+    else if(progress<98)progress+=Math.random()*0.8+0.05;
+    progress=Math.min(progress,98);
+    bar.style.width=progress+'%';
+    bar.setAttribute('aria-valuenow',Math.floor(progress));
+    if(progress<98)requestAnimationFrame(step);
+  };
+  requestAnimationFrame(step);
+  window.addEventListener('load',()=>{
+    setTimeout(()=>{
+      bar.style.transition='width 380ms cubic-bezier(.2,.9,.3,1)';
+      bar.style.width='100%';
+      bar.setAttribute('aria-valuenow',100);
+      setTimeout(()=>{
+        const loader=document.querySelector('.top-loader');
+        if(loader){
+          loader.style.transition='opacity 420ms ease';
+          loader.style.opacity='0';
+          setTimeout(()=>{if(loader&&loader.parentNode)loader.parentNode.removeChild(loader);},700);
+        }
+      },420);
+      const p=document.getElementById('page');
+      if(p){p.style.transition='opacity 420ms ease';p.style.opacity=1;}
+    },180);
+  });
+})();
+
+(function(){
+  document.querySelectorAll('.background .blob').forEach(b=>{
+    b.style.transform=(b.style.transform||'')+' translateZ(0)';
+    b.style.willChange='transform, opacity';
+  });
+})();
+
+(function(){
+  const theme=document.documentElement.getAttribute('data-theme');
+  if(theme!=='winter')return;
+  const wrap=document.getElementById('snowWrap');
+  if(!wrap)return;
+  const isSmall=window.matchMedia('(max-width:640px)').matches;
+  const flakes=isSmall?6:16;
+  const chars=['❅','❆','✻'];
+  for(let i=0;i<flakes;i++){
+    const el=document.createElement('div');
+    el.className='snowflake';
+    const left=Math.random()*100;
+    const delay=Math.random()*-20;
+    const dur=8+Math.random()*12;
+    const size=12+Math.floor(Math.random()*18);
+    el.style.left=left+'vw';
+    el.style.fontSize=size+'px';
+    el.style.animationDuration=dur+'s';
+    el.style.animationDelay=delay+'s';
+    el.textContent=chars[Math.floor(Math.random()*chars.length)];
+    wrap.appendChild(el);
+  }
+})();
+</script>
+</body>
+</html>
