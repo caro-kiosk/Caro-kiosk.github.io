@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>C‑Wiki · Article</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <style>
+    :root {
+      --bg: #050718;
+      --bg-alt: #0b0f2a;
+      --accent: #7f5af0;
+      --accent-soft: #5d3fd3;
+      --accent-blue: #3c8dff;
+      --accent-orange: #ff9f43;
+      --text: #e5e9ff;
+      --muted: #a0a4c0;
+      --border: rgba(255, 255, 255, 0.06);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top, #101632 0, #050718 55%, #020310 100%);
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    /* Top nav */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.75rem 1.75rem;
+      background: linear-gradient(90deg, rgba(11, 15, 42, 0.95), rgba(5, 7, 24, 0.98));
+      border-bottom: 1px solid var(--border);
+      backdrop-filter: blur(18px);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .nav-title {
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      margin-left: 1.25rem;
+      font-size: 0.9rem;
+      position: relative;
+    }
+
+    .nav-links a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -0.25rem;
+      width: 0;
+      height: 2px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, var(--accent), var(--accent-blue));
+      transition: width 0.2s ease-out;
+    }
+
+    .nav-links a:hover {
+      color: var(--text);
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    .page {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 2.5rem 1.25rem 4rem;
+    }
+
+    .card {
+      background: linear-gradient(135deg, rgba(11, 15, 42, 0.96), rgba(5, 7, 24, 0.98));
+      border-radius: 18px;
+      border: 1px solid var(--border);
+      padding: 2rem 1.75rem;
+      box-shadow: 0 24px 80px rgba(0, 0, 0, 0.85);
+    }
+
+    .breadcrumbs {
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin-bottom: 1rem;
+    }
+
+    .breadcrumbs a {
+      color: var(--muted);
+      text-decoration: none;
+    }
+
+    .breadcrumbs a:hover {
+      color: var(--text);
+      text-decoration: underline;
+    }
+
+    .article-title {
+      font-size: 2rem;
+      font-weight: 700;
+      margin: 0 0 0.5rem;
+      line-height: 1.2;
+    }
+
+    .article-meta {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--muted);
+      margin-bottom: 1.75rem;
+    }
+
+    .article-content {
+      line-height: 1.65;
+    }
+
+    .article-content h2 {
+      font-size: 1.4rem;
+      font-weight: 600;
+      margin: 2rem 0 1rem;
+      color: var(--text);
+    }
+
+    .article-content h3 {
+      font-size: 1.15rem;
+      font-weight: 600;
+      margin: 1.5rem 0 0.75rem;
+      color: var(--accent-blue);
+    }
+
+    .article-content p {
+      margin-bottom: 1.25rem;
+      color: #d5d9ff;
+    }
+
+    .article-content ul,
+    .article-content ol {
+      margin: 1rem 0 1.25rem 1.25rem;
+      padding: 0;
+    }
+
+    .article-content li {
+      margin-bottom: 0.5rem;
+      color: #d5d9ff;
+    }
+
+    .article-content code {
+      background: rgba(127, 90, 240, 0.15);
+      padding: 0.2rem 0.4rem;
+      border-radius: 6px;
+      font-family: 'Monaco', 'Menlo', monospace;
+      font-size: 0.9em;
+      border: 1px solid rgba(127, 90, 240, 0.3);
+    }
+
+    .article-content pre {
+      background: rgba(11, 15, 42, 0.9);
+      padding: 1.25rem;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      overflow-x: auto;
+      margin: 1.25rem 0;
+    }
+
+    .article-content pre code {
+      background: none;
+      padding: 0;
+      border: none;
+      font-size: 0.95em;
+    }
+
+    .tag-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 1.5rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border);
+    }
+
+    .tag-pill {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.25rem 0.75rem;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      background: rgba(127, 90, 240, 0.18);
+      color: var(--text);
+      border: 1px solid rgba(127, 90, 240, 0.35);
+      text-decoration: none;
+      transition: all 0.15s ease-out;
+    }
+
+    .tag-pill:hover {
+      background: rgba(127, 90, 240, 0.3);
+      transform: translateY(-1px);
+    }
+
+    @media (max-width: 720px) {
+      .page {
+        padding: 1.5rem 1rem 3rem;
+      }
+      
+      .card {
+        padding: 1.5rem 1.25rem;
+      }
+      
+      .article-title {
+        font-size: 1.6rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="navbar">
+    <div class="nav-title">C‑Wiki</div>
+    <nav class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="structure.html">Structure</a>
+      <a href="article.html">Sample article</a>
+    </nav>
+  </header>
+
+  <main class="page">
+    <article class="card">
+      <div class="breadcrumbs">
+        <a href="index.html">Home</a> ›
+        <a href="structure.html">Structure</a> ›
+        <span id="breadcrumbTitle">Installation</span>
+      </div>
+
+      <h1 class="article-title" id="articleTitle">Installation</h1>
+      <div class="article-meta" id="articleMeta">
+        Basics · Updated 2 hours ago
+      </div>
+
+      <div class="article-content" id="articleContent">
+        <p>
+          Install CWiki tools and packages using your preferred package manager. The installation process is straightforward and supports all major platforms.
+        </p>
+
+        <h2>Prerequisites</h2>
+        <ul>
+          <li>Node.js 18+ or Python 3.9+</li>
+          <li>Git 2.30+</li>
+          <li>50MB free disk space</li>
+        </ul>
+
+        <h2>Quick Install</h2>
+        <p>
+          Choose your platform and run the appropriate command:
+        </p>
+
+        <h3>npm (Recommended)</h3>
+        <pre><code>npm install -g @cwik/tools</code></pre>
+
+        <h3>pip</h3>
+        <pre><code>pip install cwik-tools</code></pre>
+
+        <h3>From Source</h3>
+        <ol>
+          <li>Clone the repository: <code>git clone https://github.com/yourorg/cwiki.git</code></li>
+          <li>Install dependencies: <code>npm install</code></li>
+          <li>Build: <code>npm run build</code></li>
+          <li>Link globally: <code>npm link</code></li>
+        </ol>
+
+        <h2>Verify Installation</h2>
+        <p>
+          Test that everything works by running:
+        </p>
+        <pre><code>cwiki --version
+cwiki doctor</code></pre>
+
+        <p>
+          The <code>doctor</code> command will check your environment and report any issues.
+        </p>
+
+        <h2>Next Steps</h2>
+        <p>
+          Once installed, configure your environment by following the <a href="article.html?slug=configuration">Configuration</a> guide. 
+          You can also explore available commands with <code>cwiki --help</code>.
+        </p>
+
+        <div class="tag-list">
+          <a href="#" class="tag-pill">setup</a>
+          <a href="#" class="tag-pill">packages</a>
+          <a href="#" class="tag-pill">nodejs</a>
+          <a href="#" class="tag-pill">python</a>
+        </div>
+      </div>
+    </article>
+  </main>
+
+  <script>
+    // Article database – sync with index.html ARTICLES array
+    const ARTICLE_DATA = {
+      "getting-started": {
+        title: "Getting started",
+        category: "Basics",
+        tags: ["intro", "overview"],
+        html: `
+          <p>Introduce your project and explain what this wiki covers.</p>
+          <h2>Prerequisites</h2>
+          <p>List tools, versions and accounts users need before starting.</p>
+        `
+      },
+      "installation": {
+        title: "Installation",
+        category: "Basics",
+        tags: ["setup", "packages"],
+        html: `
+          <p>Describe how to install your project step by step. (Real content loaded above)</p>
+        `
+      },
+      "configuration": {
+        title: "Configuration",
+        category: "Basics",
+        tags: ["config", "settings"],
+        html: `
+          <p>Explain configuration files, environment variables and options.</p>
+        `
+      },
+      "faq": {
+        title: "FAQ",
+        category: "Guides",
+        tags: ["questions"],
+        html: `
+          <p>Answer the most common questions about your project.</p>
+        `
+      }
+    };
+
+    function getQueryParams() {
+      const params = {};
+      const search = window.location.search.substring(1);
+      search.split("&").forEach(pair => {
+        if (!pair) return;
+        const [k, v] = pair.split("=");
+        params[decodeURIComponent(k)] = decodeURIComponent(v || "");
+      });
+      return params;
+    }
+
+    function renderArticle() {
+      const params = getQueryParams();
+      const slug = params.slug;
+      const query = params.q;
+
+      const titleEl = document.getElementById("articleTitle");
+      const metaEl = document.getElementById("articleMeta");
+      const contentEl = document.getElementById("articleContent");
+      const crumbEl = document.getElementById("breadcrumbTitle");
+
+      if (slug && ARTICLE_DATA[slug]) {
+        const data = ARTICLE_DATA[slug];
+        titleEl.textContent = data.title;
+        crumbEl.textContent = data.title;
+        metaEl.innerHTML = data.category + ' · Updated <span style="color: var(--accent-blue);">2 hours ago</span>';
+        contentEl.innerHTML = data.html;
+        document.title = `C‑Wiki · ${data.title}`;
+      } else if (query) {
+        const safe = query.replace(/</g, "&lt;").replace(/>/g, "&gt;");
+        titleEl.textContent = "Article not found";
+        crumbEl.textContent = "Article not found";
+        metaEl.textContent = "Search · No results";
+        contentEl.innerHTML = `
+          <p>No article matches "${safe}".</p>
+          <p>Try different keywords or <a href="index.html">search again</a>.</p>
+        `;
+      } else {
+        // Fallback to installation demo
+        renderArticle();
+      }
+    }
+
+    // Load on page ready
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', renderArticle);
+    } else {
+      renderArticle();
+    }
+  </script>
+</body>
+</html>
