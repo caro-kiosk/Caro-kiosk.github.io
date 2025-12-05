@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <title>C‑Wiki · Article</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <style>
     :root {
@@ -16,99 +16,77 @@
       --border: rgba(255, 255, 255, 0.06);
     }
 
-    /* PERFORMANCE: Optimized viewport + no lag */
-    html { height: -webkit-fill-available; }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { height: 100%; }
     body {
-      margin: 0;
       font-family: system-ui, -apple-system, sans-serif;
-      min-height: 100vh;
-      background: #050718;
       background: radial-gradient(circle at top, #101632 0%, #050718 55%, #020310 100%);
-      background-size: cover;
-      background-attachment: scroll;
       color: var(--text);
+      min-height: 100vh;
+      line-height: 1.65;
       overflow-x: hidden;
-      -webkit-font-smoothing: antialiased;
-      will-change: auto;
     }
 
-    main { min-height: calc(100vh - 80px); }
-
-    * { box-sizing: border-box; }
-
-    /* OPTIMIZED: GPU acceleration + transform hacks */
+    /* KALI-STYLE: Full-width static navbar - NO GLITCH! */
     .navbar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 0.75rem 1.75rem;
-      background: rgba(11, 15, 42, 0.98);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--border);
-      position: sticky;
+      position: fixed;
       top: 0;
-      z-index: 10;
-      transform: translateZ(0);
+      left: 0;
+      right: 0;
+      height: 60px;
+      background: linear-gradient(90deg, #0b0f2a 0%, #050718 100%);
+      border-bottom: 1px solid var(--border);
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 1.5rem;
+      backdrop-filter: blur(20px);
     }
 
     .nav-title {
-      font-weight: 600;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      font-size: 0.85rem;
-      color: var(--muted);
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: var(--text);
     }
 
     .nav-links {
       display: flex;
-      gap: 1.25rem;
+      gap: 2rem;
     }
 
     .nav-links a {
       color: var(--muted);
       text-decoration: none;
-      font-size: 0.9rem;
-      position: relative;
+      font-size: 0.95rem;
+      font-weight: 500;
       transition: color 0.2s ease;
-    }
-
-    .nav-links a::after {
-      content: "";
-      position: absolute;
-      left: 0;
-      bottom: -4px;
-      width: 0;
-      height: 2px;
-      background: linear-gradient(90deg, var(--accent), var(--accent-blue));
-      transition: width 0.2s ease;
-      border-radius: 1px;
     }
 
     .nav-links a:hover {
       color: var(--text);
     }
 
-    .nav-links a:hover::after { width: 100%; }
-
+    /* Content starts BELOW navbar */
     .page {
       max-width: 960px;
       margin: 0 auto;
-      padding: 2rem 1.25rem 4rem;
+      padding: 80px 1.25rem 4rem; /* 80px = navbar + top padding */
     }
 
     .card {
-      background: rgba(11, 15, 42, 0.96);
-      border-radius: 16px;
+      background: linear-gradient(135deg, rgba(11, 15, 42, 0.95), rgba(5, 7, 24, 0.95));
+      border-radius: 20px;
       border: 1px solid var(--border);
-      padding: 2rem 1.5rem;
-      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
-      transform: translateZ(0);
+      padding: 2.5rem;
+      box-shadow: 0 30px 100px rgba(0, 0, 0, 0.8);
     }
 
     .breadcrumbs {
       font-size: 0.85rem;
       color: var(--muted);
-      margin-bottom: 1rem;
+      margin-bottom: 1.5rem;
     }
 
     .breadcrumbs a {
@@ -119,46 +97,42 @@
     .breadcrumbs a:hover { color: var(--text); }
 
     .article-title {
-      font-size: 2rem;
+      font-size: 2.2rem;
       font-weight: 700;
-      margin: 0 0 0.75rem;
+      margin-bottom: 0.75rem;
       line-height: 1.15;
+      color: var(--text);
     }
 
     .article-meta {
-      font-size: 0.8rem;
+      font-size: 0.85rem;
       text-transform: uppercase;
       letter-spacing: 0.1em;
       color: var(--muted);
-      margin-bottom: 2rem;
-    }
-
-    .article-content {
-      line-height: 1.65;
+      margin-bottom: 2.5rem;
     }
 
     .article-content h2 {
-      font-size: 1.35rem;
+      font-size: 1.5rem;
       font-weight: 600;
-      margin: 2.5rem 0 1rem;
+      margin: 2.5rem 0 1.25rem;
       color: var(--text);
     }
 
     .article-content h3 {
-      font-size: 1.15rem;
+      font-size: 1.25rem;
       font-weight: 600;
-      margin: 2rem 0 0.75rem;
+      margin: 2rem 0 1rem;
       color: var(--accent-blue);
     }
 
     .article-content p {
-      margin-bottom: 1.25rem;
+      margin-bottom: 1.5rem;
       color: #d5d9ff;
     }
 
     .article-content ul, .article-content ol {
-      margin: 1rem 0 1.25rem 1.25rem;
-      padding: 0;
+      margin: 1.25rem 0 1.5rem 1.5rem;
     }
 
     .article-content li {
@@ -166,71 +140,65 @@
       color: #d5d9ff;
     }
 
-    /* OPTIMIZED: Simple code blocks */
     .article-content code {
-      background: rgba(127, 90, 240, 0.12);
-      padding: 0.2rem 0.5rem;
+      background: rgba(127, 90, 240, 0.15);
+      padding: 0.25rem 0.5rem;
       border-radius: 6px;
-      font-family: 'SF Mono', Monaco, monospace;
+      font-family: 'SF Mono', monospace;
       font-size: 0.9em;
       color: var(--accent);
-      border: 1px solid rgba(127, 90, 240, 0.2);
+      border: 1px solid rgba(127, 90, 240, 0.3);
     }
 
     .article-content pre {
       background: rgba(11, 15, 42, 0.95);
-      padding: 1.25rem;
+      padding: 1.5rem;
       border-radius: 12px;
       border: 1px solid var(--border);
       overflow-x: auto;
-      margin: 1.25rem 0;
-      font-family: 'SF Mono', Monaco, monospace;
+      margin: 1.5rem 0;
+      font-family: 'SF Mono', monospace;
       font-size: 0.9em;
-    }
-
-    .article-content pre code {
-      background: none;
-      padding: 0;
-      border: none;
     }
 
     .tag-list {
       display: flex;
       flex-wrap: wrap;
-      gap: 0.5rem;
-      margin-top: 2rem;
-      padding-top: 1.5rem;
+      gap: 0.75rem;
+      margin-top: 2.5rem;
+      padding-top: 2rem;
       border-top: 1px solid var(--border);
     }
 
     .tag-pill {
-      padding: 0.3rem 0.75rem;
-      border-radius: 20px;
-      font-size: 0.8rem;
-      background: rgba(127, 90, 240, 0.15);
+      padding: 0.4rem 1rem;
+      border-radius: 25px;
+      font-size: 0.85rem;
+      background: rgba(127, 90, 240, 0.2);
       color: var(--text);
-      border: 1px solid rgba(127, 90, 240, 0.3);
+      border: 1px solid rgba(127, 90, 240, 0.4);
       text-decoration: none;
-      transition: all 0.15s ease;
       font-weight: 500;
+      transition: all 0.2s ease;
     }
 
     .tag-pill:hover {
-      background: rgba(127, 90, 240, 0.25);
-      transform: translateY(-1px);
+      background: rgba(127, 90, 240, 0.3);
+      transform: translateY(-2px);
     }
 
-    /* MOBILE */
-    @media (max-width: 720px) {
-      .page { padding: 1.5rem 1rem 3rem; }
-      .card { padding: 1.5rem 1.25rem; }
-      .article-title { font-size: 1.6rem; }
+    @media (max-width: 768px) {
+      .navbar { padding: 0 1rem; height: 55px; }
+      .page { padding: 70px 1rem 3rem; }
+      .card { padding: 2rem 1.5rem; }
+      .article-title { font-size: 1.8rem; }
+      .nav-links { gap: 1.5rem; }
     }
   </style>
 </head>
 <body>
   <header class="navbar">
-    <div class="C-Wiki">C‑Wiki</div>
+    <div class="nav-title">C‑Wiki</div>
     <nav class="nav-links">
       <a href="index.html">Home</a>
       <a href="structure.html">Structure</a>
@@ -240,8 +208,7 @@
   <main class="page">
     <article class="card">
       <div class="breadcrumbs">
-        <a href="index.html">Home</a> ›
-        <a href="structure.html">Structure</a> ›
+        <a href="index.html">Home</a> › Structure › 
         <span id="breadcrumbTitle">Installation</span>
       </div>
 
@@ -251,9 +218,7 @@
       </div>
 
       <div class="article-content" id="articleContent">
-        <p>
-          Install CWiki tools using your preferred package manager. Supports all major platforms.
-        </p>
+        <p>Install CWiki tools using your preferred package manager. Supports all major platforms.</p>
 
         <h2>Prerequisites</h2>
         <ul>
@@ -264,37 +229,44 @@
 
         <h2>Quick Install</h2>
         <p>Choose your platform:</p>
-
-        <h3>npm</h3>
+        <h3>npm (Recommended)</h3>
         <pre><code>npm install -g @cwik/tools</code></pre>
-
         <h3>pip</h3>
         <pre><code>pip install cwik-tools</code></pre>
 
-        <h2>Verify</h2>
+        <h2>Verify Installation</h2>
         <pre><code>cwiki --version
 cwiki doctor</code></pre>
 
         <h2>Next Steps</h2>
-        <p>Configure with the <a href="article.html?slug=configuration">Configuration</a> guide.</p>
+        <p>Configure your environment with the <a href="article.html?slug=configuration">Configuration</a> guide.</p>
 
         <div class="tag-list">
           <a href="#" class="tag-pill">setup</a>
           <a href="#" class="tag-pill">packages</a>
           <a href="#" class="tag-pill">nodejs</a>
+          <a href="#" class="tag-pill">python</a>
         </div>
       </div>
     </article>
   </main>
 
   <script>
-    const ARTICLES={getting:"Getting started",installation:{title:"Installation",category:"Basics",html:`<p>Install CWiki tools using your preferred package manager. Supports all major platforms.</p><h2>Prerequisites</h2><ul><li>Node.js 18+ or Python 3.9+</li><li>Git 2.30+</li><li>50MB disk space</li></ul><h2>Quick Install</h2><p>Choose your platform:</p><h3>npm</h3><pre><code>npm install -g @cwik/tools</code></pre><h3>pip</h3><pre><code>pip install cwik-tools</code></pre><h2>Verify</h2><pre><code>cwiki --version\ncwiki doctor</code></pre><h2>Next Steps</h2><p>Configure with the <a href="article.html?slug=configuration">Configuration</a> guide.</p>`},configuration:{title:"Configuration",category:"Basics",html:`<p>Configure CWiki tools and settings.</p>`},faq:{title:"FAQ",category:"Guides",html:`<p>Frequently asked questions.</p>`}};
+    const ARTICLES = {
+      "getting-started": {title: "Getting started", category: "Basics", html: `<p>Quick intro to CWiki.</p>`},
+      "installation": {title: "Installation", category: "Basics", html: document.getElementById("articleContent").innerHTML},
+      "configuration": {title: "Configuration", category: "Basics", html: `<p>Configure CWiki tools.</p>`},
+      "faq": {title: "FAQ", category: "Guides", html: `<p>Frequently asked questions.</p>`}
+    };
 
-    function getParams(){const p={},s=location.search.slice(1);s.split("&").forEach(e=>{if(!e)return;const[t,v]=e.split("=");p[decodeURIComponent(t)]=decodeURIComponent(v||"")});return p}
+    const params = new URLSearchParams(location.search);
+    const slug = params.get("slug") || "installation";
+    const data = ARTICLES[slug] || ARTICLES["installation"];
 
-    function render(){const p=getParams(),slug=p.slug,q=p.q,t=document.getElementById("articleTitle"),m=document.getElementById("articleMeta"),c=document.getElementById("articleContent"),b=document.getElementById("breadcrumbTitle");if(slug&&ARTICLES[slug]){const d=ARTICLES[slug];t.textContent=d.title;b.textContent=d.title;m.innerHTML=`${d.category} · <span style="color:var(--accent-blue)">Updated 2h ago</span>`;c.innerHTML=d.html;document.title=`C‑Wiki · ${d.title}`}else if(q){const f=q.replace(/[<>]/g,e=>e===">"?"&gt;":"<").replace(/</g,"&lt;");t.textContent="Not found";b.textContent="Not found";m.textContent="Search · No results";c.innerHTML=`<p>No article matches "${f}". <a href="index.html">Search again</a>.</p>`}}
-
-    render();
+    document.getElementById("articleTitle").textContent = data.title;
+    document.getElementById("breadcrumbTitle").textContent = data.title;
+    document.getElementById("articleMeta").innerHTML = `${data.category} · <span style="color:var(--accent-blue)">Updated 2 hours ago</span>`;
+    document.title = `C‑Wiki · ${data.title}`;
   </script>
 </body>
 </html>
