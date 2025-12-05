@@ -2,85 +2,522 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
+  <title>C‑Wiki · Home</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Wiki</title>
+
   <style>
+    :root {
+      --bg: #050718;
+      --bg-alt: #0b0f2a;
+      --accent: #7f5af0;
+      --accent-soft: #5d3fd3;
+      --accent-blue: #3c8dff;
+      --accent-orange: #ff9f43;
+      --text: #e5e9ff;
+      --muted: #a0a4c0;
+      --border: rgba(255, 255, 255, 0.06);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
     body {
-      font-family: Arial, sans-serif;
-      line-height: 1.6;
-      max-width: 900px;
-      margin: 2rem auto;
-      padding: 0 1rem;
-      background: linear-gradient(135deg, #004080 0%, #001d33 40%, #0073e6 60%, #003366 100%);
-      color: #f0f8ff;
-      box-shadow: inset 0 0 80px rgba(0, 0, 0, 0.4);
-      border-radius: 8px;
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top, #101632 0, #050718 55%, #020310 100%);
+      color: var(--text);
+      min-height: 100vh;
     }
-    header {
-      text-align: center;
-      margin-bottom: 2rem;
-      color: #cce7ff;
+
+    /* Top nav */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.75rem 1.75rem;
+      background: linear-gradient(90deg, rgba(11, 15, 42, 0.95), rgba(5, 7, 24, 0.98));
+      border-bottom: 1px solid var(--border);
+      backdrop-filter: blur(18px);
+      position: sticky;
+      top: 0;
+      z-index: 10;
     }
-    nav {
-      margin-bottom: 2rem;
-      border-bottom: 1px solid #66a3ff;
-      padding-bottom: 0.5rem;
+
+    .nav-title {
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-size: 0.85rem;
+      color: var(--muted);
     }
-    nav a {
-      margin-right: 1rem;
+
+    .nav-links a {
+      color: var(--muted);
       text-decoration: none;
-      color: #99cfff;
-      font-weight: bold;
-      transition: color 0.3s ease;
-    }
-    nav a:hover {
-      color: #ffffff;
-      text-decoration: underline;
-    }
-    article h1, article h2 {
-      border-bottom: 2px solid #99cfff;
-      padding-bottom: 0.3rem;
-      color: #cce7ff;
-    }
-    article p {
-      color: #d0e7ff;
-    }
-    footer {
-      text-align: center;
-      margin-top: 4rem;
+      margin-left: 1.25rem;
       font-size: 0.9rem;
-      color: #99cfff;
+      position: relative;
     }
-    @media (max-width: 600px) {
-      body {
-        margin: 1rem;
-        padding: 0 0.5rem;
+
+    .nav-links a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -0.25rem;
+      width: 0;
+      height: 2px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, var(--accent), var(--accent-blue));
+      transition: width 0.2s ease-out;
+    }
+
+    .nav-links a:hover {
+      color: var(--text);
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    .page {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 2.5rem 1.25rem 4rem;
+    }
+
+    .home-hero {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      margin-top: 5vh;
+    }
+
+    /* Glitchy C logo */
+    .glitch-logo {
+      position: relative;
+      width: 120px;
+      height: 120px;
+      margin-bottom: 1.75rem;
+    }
+
+    /* Outer glow circle layers */
+    .glitch-c-base,
+    .glitch-c-layer {
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      border: 3px solid var(--accent);
+      box-shadow: 0 0 18px rgba(127, 90, 240, 0.5),
+                  0 0 36px rgba(60, 141, 255, 0.25);
+    }
+
+    .glitch-c-layer {
+      mix-blend-mode: screen;
+      border-color: var(--accent-blue);
+      animation: glitch 1.6s infinite ease-in-out alternate;
+    }
+
+    /* Inner C shape: ring with missing right side */
+    .glitch-c-shape {
+      position: absolute;
+      inset: 16%;
+      border-radius: 50%;
+      border: 8px solid var(--accent);
+      border-right-color: transparent;
+      border-bottom-color: rgba(127, 90, 240, 0.7);
+      transform: rotate(0deg);
+      box-shadow:
+        0 0 16px rgba(127, 90, 240, 0.7),
+        0 0 30px rgba(60, 141, 255, 0.4);
+    }
+
+    /* Orange glowing dot in the middle */
+    .glitch-dot {
+      position: absolute;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: radial-gradient(circle, #ffe8c2 0, var(--accent-orange) 40%, #b64700 100%);
+      box-shadow:
+        0 0 10px rgba(255, 159, 67, 0.9),
+        0 0 22px rgba(255, 159, 67, 0.9),
+        0 0 40px rgba(255, 159, 67, 0.7);
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    @keyframes glitch {
+      0%   { transform: translate(0, 0); filter: hue-rotate(0deg); }
+      35%  { transform: translate(-2px, 1px); }
+      70%  { transform: translate(2px, -1px); }
+      100% { transform: translate(-1px, 1px); filter: hue-rotate(45deg); }
+    }
+
+    .home-title {
+      font-size: 2.2rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-weight: 700;
+      margin-bottom: 0.6rem;
+    }
+
+    .home-subtitle {
+      color: var(--muted);
+      max-width: 540px;
+      margin-bottom: 2rem;
+    }
+
+    /* Search bar */
+    .search-box {
+      display: flex;
+      width: min(480px, 100%);
+      border-radius: 999px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      background: radial-gradient(circle at top left, rgba(127, 90, 240, 0.18), rgba(5, 7, 24, 0.9));
+      box-shadow:
+        0 18px 60px rgba(0, 0, 0, 0.8),
+        0 0 0 1px rgba(255, 255, 255, 0.02);
+    }
+
+    .search-input {
+      flex: 1;
+      padding: 0.85rem 1.1rem;
+      border: none;
+      outline: none;
+      background: transparent;
+      color: var(--text);
+      font-size: 0.95rem;
+    }
+
+    .search-input::placeholder {
+      color: var(--muted);
+    }
+
+    .search-button {
+      border: none;
+      padding: 0.85rem 1.3rem;
+      background: linear-gradient(135deg, var(--accent), var(--accent-blue));
+      color: #fff;
+      font-weight: 500;
+      cursor: pointer;
+      font-size: 0.95rem;
+      border-radius: 999px;
+      margin: 0.15rem;
+      box-shadow: 0 0 18px rgba(60, 141, 255, 0.65);
+      transition: transform 0.12s ease-out, box-shadow 0.12s ease-out;
+    }
+
+    .search-button:hover {
+      transform: translateY(-1px);
+      box-shadow:
+        0 0 24px rgba(60, 141, 255, 0.85),
+        0 0 45px rgba(127, 90, 240, 0.65);
+    }
+
+    /* Search results panel */
+    .search-results {
+      margin-top: 1.25rem;
+      width: min(640px, 100%);
+      background: linear-gradient(135deg, rgba(11, 15, 42, 0.98), rgba(5, 7, 24, 0.98));
+      border-radius: 18px;
+      border: 1px solid var(--border);
+      box-shadow: 0 24px 80px rgba(0, 0, 0, 0.9);
+      padding: 0.75rem 1rem 0.9rem;
+      text-align: left;
+    }
+
+    .search-results-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--muted);
+      margin-bottom: 0.4rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+      padding-bottom: 0.35rem;
+    }
+
+    .search-results-list {
+      list-style: none;
+      padding: 0;
+      margin: 0.2rem 0 0;
+      max-height: 320px;
+      overflow-y: auto;
+    }
+
+    /* Custom scrollbar */
+    .search-results-list::-webkit-scrollbar {
+      width: 6px;
+    }
+    .search-results-list::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    .search-results-list::-webkit-scrollbar-thumb {
+      background: rgba(127, 90, 240, 0.45);
+      border-radius: 999px;
+    }
+
+    .search-result-item {
+      padding: 0.55rem 0.35rem;
+      border-radius: 10px;
+      cursor: pointer;
+      display: grid;
+      grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr);
+      column-gap: 0.5rem;
+      row-gap: 0.15rem;
+      align-items: flex-start;
+      transition: background 0.12s ease-out, transform 0.06s ease-out;
+    }
+
+    .search-result-item:hover {
+      background: radial-gradient(circle at left, rgba(127, 90, 240, 0.24), transparent 60%);
+      transform: translateY(-1px);
+    }
+
+    .search-result-main {
+      min-width: 0;
+    }
+
+    .search-result-title {
+      font-size: 0.93rem;
+      font-weight: 600;
+    }
+
+    .search-result-title span {
+      color: var(--accent-blue);
+    }
+
+    .search-result-desc {
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-top: 0.1rem;
+    }
+
+    .search-result-meta {
+      text-align: right;
+      font-size: 0.75rem;
+      color: var(--muted);
+    }
+
+    .tag-pill {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.08rem 0.45rem;
+      border-radius: 999px;
+      font-size: 0.7rem;
+      background: rgba(127, 90, 240, 0.18);
+      color: var(--text);
+      margin-left: 0.25rem;
+      border: 1px solid rgba(127, 90, 240, 0.35);
+    }
+
+    @media (max-width: 720px) {
+      .home-title {
+        font-size: 1.7rem;
       }
     }
   </style>
 </head>
 <body>
-  <header>
-    <h1>Caro Wiki</h1>
-    <p>Let us guide you trugh the web</p>
+  <header class="navbar">
+    <div class="nav-title">C‑Wiki</div>
+    <nav class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="structure.html">Structure</a>
+      <a href="article.html">Sample article</a>
+    </nav>
   </header>
 
-  <nav>
-    <a href="home.html">Home</a>
-    <a href="structure.html">Structure</a>
-    <a href="lib.html">library</a>
-  </nav>
+  <main class="page">
+    <section class="home-hero">
+      <!-- Glitchy C logo -->
+      <div class="glitch-logo" aria-hidden="true">
+        <div class="glitch-c-base"></div>
+        <div class="glitch-c-layer"></div>
+        <div class="glitch-c-shape"></div>
+        <div class="glitch-dot"></div>
+      </div>
 
-  <article>
-    <h1>Welcome to the Wiki</h1>
-    <p>Here you can gain knowledge on how the website works, how its structured, who ist developing it ...</p>
+      <h1 class="home-title">C‑Wiki</h1>
+      <p class="home-subtitle">
+        Welcome to CWiki. If you need any help regarding our tools, generators or packages you'll probably find your answers here.
+      </p>
 
-    <h2>Some other stuff too</h2>
-    <p>Later we can link this page to the rest of the website. befor that we need the wiki to be finished, meaning an seachbar, articles and lots more.</p>
-  </article>
+      <form class="search-box" onsubmit="return goToArticle(event)">
+        <input
+          class="search-input"
+          type="search"
+          placeholder="Search articles…"
+          aria-label="Search articles"
+          id="searchInput"
+        />
+        <button class="search-button" type="submit">Search</button>
+      </form>
 
-  <footer>
-    &copy; 2025 Caro Comunity
-  </footer>
+      <!-- Search results list -->
+      <div class="search-results" id="searchResults" hidden>
+        <div class="search-results-header">
+          <span id="resultsCount">Type to search</span>
+        </div>
+        <ul class="search-results-list" id="resultsList"></ul>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    // Article database – extend with your real articles
+    const ARTICLES = [
+      {
+        slug: "getting-started",
+        title: "Getting started",
+        category: "Basics",
+        tags: ["intro", "overview"],
+        description: "Quick introduction to CWiki and how to use this documentation."
+      },
+      {
+        slug: "installation",
+        title: "Installation",
+        category: "Basics",
+        tags: ["setup", "packages"],
+        description: "How to install tools, generators and packages for your environment."
+      },
+      {
+        slug: "configuration",
+        title: "Configuration",
+        category: "Basics",
+        tags: ["config", "settings"],
+        description: "Configure CWiki tools, adjust settings and customize behaviour."
+      },
+      {
+        slug: "faq",
+        title: "FAQ",
+        category: "Guides",
+        tags: ["questions"],
+        description: "Frequently asked questions and troubleshooting tips."
+      }
+    ];
+
+    function slugify(text) {
+      return text
+        .toString()
+        .trim()
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, "-")
+        .replace(/^-+|-+$/g, "");
+    }
+
+    function filterArticles(query) {
+      const q = query.trim().toLowerCase();
+      if (!q) return [];
+      return ARTICLES.filter(a => {
+        return (
+          a.title.toLowerCase().includes(q) ||
+          (a.description && a.description.toLowerCase().includes(q)) ||
+          (a.tags || []).some(t => t.toLowerCase().includes(q))
+        );
+      });
+    }
+
+    function renderResults(query) {
+      const panel = document.getElementById("searchResults");
+      const list = document.getElementById("resultsList");
+      const countEl = document.getElementById("resultsCount");
+
+      const results = filterArticles(query);
+      if (!query.trim()) {
+        panel.hidden = true;
+        list.innerHTML = "";
+        countEl.textContent = "Type to search";
+        return;
+      }
+
+      panel.hidden = false;
+      countEl.textContent =
+        results.length === 1 ? "1 result" : results.length + " results";
+
+      if (!results.length) {
+        list.innerHTML = `
+          <li class="search-result-item">
+            <div class="search-result-main">
+              <div class="search-result-title">No results</div>
+              <div class="search-result-desc">
+                Try different keywords or browse from the structure page.
+              </div>
+            </div>
+            <div class="search-result-meta"></div>
+          </li>
+        `;
+        return;
+      }
+
+      list.innerHTML = results
+        .map(r => {
+          const tagsHtml = (r.tags || [])
+            .map(tag => `<span class="tag-pill">${tag}</span>`)
+            .join("");
+          return `
+            <li class="search-result-item" data-slug="${r.slug}">
+              <div class="search-result-main">
+                <div class="search-result-title">
+                  ${r.title}
+                </div>
+                <div class="search-result-desc">
+                  ${r.description || ""}
+                </div>
+              </div>
+              <div class="search-result-meta">
+                <div>${r.category || ""}</div>
+                <div>${tagsHtml}</div>
+              </div>
+            </li>
+          `;
+        })
+        .join("");
+
+      // Make each item clickable
+      list.querySelectorAll(".search-result-item").forEach(item => {
+        const slug = item.getAttribute("data-slug");
+        if (!slug) return;
+        item.addEventListener("click", () => {
+          window.location.href = "article.html?slug=" + encodeURIComponent(slug);
+        });
+      });
+    }
+
+    function goToArticle(event) {
+      event.preventDefault();
+      const input = document.getElementById("searchInput");
+      const query = (input.value || "").trim();
+      if (!query) return false;
+
+      // Try exact slug/title first
+      const qSlug = slugify(query);
+      let match = ARTICLES.find(a => a.slug === qSlug);
+      if (!match) {
+        const lower = query.toLowerCase();
+        match = ARTICLES.find(a => a.title.toLowerCase() === lower);
+      }
+
+      if (match) {
+        window.location.href = "article.html?slug=" + encodeURIComponent(match.slug);
+      } else {
+        // Show filtered results
+        renderResults(query);
+      }
+      return false;
+    }
+
+    // Live search on typing
+    const searchInput = document.getElementById("searchInput");
+    searchInput.addEventListener("input", (e) => {
+      renderResults(e.target.value || "");
+    });
+  </script>
 </body>
 </html>
