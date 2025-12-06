@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>C‑Wiki · Article</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <style>
+    :root {
+      --bg: #050718;
+      --bg-alt: #0b0f2a;
+      --accent: #7f5af0;
+      --accent-blue: #3c8dff;
+      --text: #e5e9ff;
+      --muted: #a0a4c0;
+      --border: rgba(255, 255, 255, 0.06);
+      --vh: 1vh; /* Dynamic viewport height */
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { height: 100%; }
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+      background: radial-gradient(circle at top, #101632 0%, #050718 55%, #020310 100%);
+      color: var(--text);
+      min-height: calc(var(--vh, 1vh) * 100);
+      line-height: 1.65;
+      overflow-x: hidden;
+    }
+
+    /* KALI-STYLE: Full-width FIXED navbar - URL bar can't shrink past this */
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 60px;
+      background: linear-gradient(90deg, #0b0f2a 0%, #050718 100%);
+      border-bottom: 1px solid var(--border);
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 1.5rem;
+      backdrop-filter: blur(20px);
+    }
+
+    .nav-title {
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: var(--text);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.95rem;
+      font-weight: 500;
+      transition: color 0.2s ease;
+    }
+
+    .nav-links a:hover { color: var(--text); }
+
+    /* Content starts BELOW fixed navbar */
+    .page {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 80px 1.25rem 4rem; /* 80px = navbar + top padding */
+      min-height: calc(calc(var(--vh, 1vh) * 100) - 80px);
+    }
+
+    .card {
+      background: linear-gradient(135deg, rgba(11, 15, 42, 0.95), rgba(5, 7, 24, 0.95));
+      border-radius: 20px;
+      border: 1px solid var(--border);
+      padding: 2.5rem;
+      box-shadow: 0 30px 100px rgba(0, 0, 0, 0.8);
+    }
+
+    .breadcrumbs {
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin-bottom: 1.5rem;
+    }
+
+    .breadcrumbs a {
+      color: var(--muted);
+      text-decoration: none;
+    }
+
+    .breadcrumbs a:hover { color: var(--text); }
+
+    .article-title {
+      font-size: 2.2rem;
+      font-weight: 700;
+      margin-bottom: 0.75rem;
+      line-height: 1.15;
+      color: var(--text);
+    }
+
+    .article-meta {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--muted);
+      margin-bottom: 2.5rem;
+    }
+
+    .article-content h2 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin: 2.5rem 0 1.25rem;
+      color: var(--text);
+    }
+
+    .article-content h3 {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin: 2rem 0 1rem;
+      color: var(--accent-blue);
+    }
+
+    .article-content p {
+      margin-bottom: 1.5rem;
+      color: #d5d9ff;
+    }
+
+    .article-content ul, .article-content ol {
+      margin: 1.25rem 0 1.5rem 1.5rem;
+    }
+
+    .article-content li {
+      margin-bottom: 0.5rem;
+      color: #d5d9ff;
+    }
+
+    .article-content code {
+      background: rgba(127, 90, 240, 0.15);
+      padding: 0.25rem 0.5rem;
+      border-radius: 6px;
+      font-family: 'SF Mono', monospace;
+      font-size: 0.9em;
+      color: var(--accent);
+      border: 1px solid rgba(127, 90, 240, 0.3);
+    }
+
+    .article-content pre {
+      background: rgba(11, 15, 42, 0.95);
+      padding: 1.5rem;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      overflow-x: auto;
+      margin: 1.5rem 0;
+      font-family: 'SF Mono', monospace;
+      font-size: 0.9em;
+    }
+
+    .tag-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-top: 2.5rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--border);
+    }
+
+    .tag-pill {
+      padding: 0.4rem 1rem;
+      border-radius: 25px;
+      font-size: 0.85rem;
+      background: rgba(127, 90, 240, 0.2);
+      color: var(--text);
+      border: 1px solid rgba(127, 90, 240, 0.4);
+      text-decoration: none;
+      font-weight: 500;
+      transition: all 0.2s ease;
+    }
+
+    .tag-pill:hover {
+      background: rgba(127, 90, 240, 0.3);
+      transform: translateY(-2px);
+    }
+
+    @media (max-width: 768px) {
+      .navbar { padding: 0 1rem; height: 55px; }
+      .page { padding-top: 75px; }
+      .card { padding: 2rem 1.5rem; }
+      .article-title { font-size: 1.8rem; }
+      .nav-links { gap: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+  <header class="navbar">
+    <div class="nav-title">C‑Wiki</div>
+    <nav class="nav-links">
+      <a href="../home">Home</a>
+      <a href="structure">Structure</a>
+    </nav>
+  </header>
+
+  <main class="page">
+    <article class="card">
+      <div class="breadcrumbs">
+        <a href="../home">Home</a> › Structure › 
+        <span id="breadcrumbTitle">File Structure</span>
+      </div>
+
+      <h1 class="article-title" id="articleTitle">Structure</h1>
+      <div class="article-meta" id="articleMeta">
+        Basics · Updated on the 07.12.2025
+      </div>
+
+      <div class="article-content" id="articleContent">
+        <p>The full curent file structure of the caro kiosk homepage including this wiki</p>
+
+        <h2>Main Parts</h2>
+        <ul>
+          <li>Home / opening hours and prices</li>
+          <li>News / Articles</li>
+          <li>Wiki / wiki and development here we are</li>
+        </ul>
+
+        <h2>Current files</h2>
+        <p>This may be outdated, but gives a big opertunity to undestand how the website is working</p>
+        <h3>Struckt (07.12.2025</h3>
+        <pre><code>
+    assets/
+    ├── AP.png
+    ├── article3.jpg
+    ├── banner-art2.jpg
+    ├── banner-art2p02.png
+    ├── banner1-art4.jpg
+    ├── banner1.jpg
+    ├── banner2.jpg
+    └── Media.md
+news/
+    ├── Articles.md
+    ├── der-ethische-konsum-von-brot-in-deutschland.html
+    ├── introducing-caro-kiosk-home.html
+    ├── our-team-and-suporters.html
+    └── to-do.html
+tools/
+    ├── article-generator/
+        ├── main.py
+        └── Template-Article.html
+    └── STRUCTURE.MD
+wiki/
+    ├── art/
+        └── sample.html
+    └── home.html
+404.html
+about.html
+apple-touch-icon.png
+dev.html
+favicon.ico
+index.html
+LICENSE
+license.html
+newspaper.html
+opening-hours.html
+prices.html
+README.md</code></pre>
+        
+
+        <div class="tag-list">
+          <a href="#" class="tag-pill">setup</a>
+          <a href="#" class="tag-pill">packages</a>
+          <a href="#" class="tag-pill">development</a>
+          <a href="#" class="tag-pill">python / html</a>
+        </div>
+      </div>
+    </article>
+  </main>
+
+  <script>
+    /* KALI-STYLE: Lock viewport height - URL bar can't shrink layout */
+    function setVh() {
+      let vh = window.innerHeight * 0.01;
+      document.documentElement.style.setProperty('--vh', `${vh}px`);
+    }
+    setVh();
+    window.addEventListener('resize', setVh);
+    window.addEventListener('orientationchange', () => { setTimeout(setVh, 100); });
+
+    /* Article rendering */
+    const ARTICLES = {
+      "getting-started": {title: "Getting started", category: "Basics", html: `<p>Quick intro to CWiki.</p>`},
+      "installation": {title: "Installation", category: "Basics", html: document.getElementById("articleContent").innerHTML},
+      "configuration": {title: "Configuration", category: "Basics", html: `<p>Configure CWiki tools.</p>`},
+      "faq": {title: "FAQ", category: "Guides", html: `<p>Frequently asked questions.</p>`}
+    };
+
+    const params = new URLSearchParams(location.search);
+    const slug = params.get("slug") || "installation";
+    const data = ARTICLES[slug] || ARTICLES["installation"];
+
+    document.getElementById("articleTitle").textContent = data.title;
+    document.getElementById("breadcrumbTitle").textContent = data.title;
+    document.getElementById("articleMeta").innerHTML = `${data.category} · <span style="color:var(--accent-blue)">Updated 2 hours ago</span>`;
+    document.title = `C‑Wiki · ${data.title}`;
+  </script>
+</body>
+</html>
