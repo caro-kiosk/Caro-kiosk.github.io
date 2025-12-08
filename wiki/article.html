@@ -370,6 +370,18 @@ cwiki doctor</code></pre>
           <h2>Can I use separate HTML files?</h2>
           <p>Yes – then you link directly to those files instead of using <code>article.html?slug=...</code>.</p>
         `
+      },
+      "article_generation": {
+        title: "Create Articles",
+        category: "Guides",
+        tags: ["questions"],
+        html: `
+          <p>A small preparation for the future</p>
+          <h2>Where are articles stored?</h2>
+          <p>They are defined in JavaScript in <code>ARTICLE_DATA</code> when using the slug-based temp.</p>
+          <h2>How do I create, edit or delete a article?</h2>
+          <p>Go and pull the file named <code>root/wiki/article.html</code>. Once you have it local, open it up in an text or code editor. VS Code or github will also be an great option because of taps ... If you got this, go find  an section named <code>const ARTICLE_DATA = {</code> and copy one block named sample. then paste it at the very end of the const list and edit it as you wish. If you are finished, open the file in your prefered browser for example <code>firefox</code>. It looks great, just push it to the github repo. Otherwise go on with editing. Also maybe let your text run through <code>languagetool</code></p>
+        `
       }
     };
 
