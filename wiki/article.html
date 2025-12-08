@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>C‑Wiki · Article</title>
+  <title>C‑Wiki</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <style>
@@ -11,17 +11,25 @@
       --bg-alt: #0b0f2a;
       --accent: #7f5af0;
       --accent-blue: #3c8dff;
+      --accent-orange: #ff9f43;
       --text: #e5e9ff;
       --muted: #a0a4c0;
       --border: rgba(255, 255, 255, 0.06);
-      --vh: 1vh; /* Dynamic viewport height */
+      --vh: 1vh;
     }
 
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-    html { height: 100%; }
+    html {
+      height: 100%;
+    }
+
     body {
-      font-family: system-ui, -apple-system, sans-serif;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       background: radial-gradient(circle at top, #101632 0%, #050718 55%, #020310 100%);
       color: var(--text);
       min-height: calc(var(--vh, 1vh) * 100);
@@ -29,7 +37,7 @@
       overflow-x: hidden;
     }
 
-    /* KALI-STYLE: Full-width FIXED navbar - URL bar can't shrink past this */
+    /* Fixed full-width navbar */
     .navbar {
       position: fixed;
       top: 0;
@@ -43,18 +51,20 @@
       align-items: center;
       justify-content: space-between;
       padding: 0 1.5rem;
-      backdrop-filter: blur(20px);
+      backdrop-filter: blur(18px);
     }
 
     .nav-title {
       font-weight: 700;
       font-size: 1.1rem;
       color: var(--text);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
     }
 
     .nav-links {
       display: flex;
-      gap: 2rem;
+      gap: 1.75rem;
     }
 
     .nav-links a {
@@ -62,25 +72,44 @@
       text-decoration: none;
       font-size: 0.95rem;
       font-weight: 500;
+      position: relative;
       transition: color 0.2s ease;
     }
 
-    .nav-links a:hover { color: var(--text); }
+    .nav-links a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -3px;
+      width: 0;
+      height: 2px;
+      border-radius: 2px;
+      background: linear-gradient(90deg, var(--accent), var(--accent-blue));
+      transition: width 0.2s ease;
+    }
 
-    /* Content starts BELOW fixed navbar */
+    .nav-links a:hover {
+      color: var(--text);
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    /* Content under navbar */
     .page {
       max-width: 960px;
       margin: 0 auto;
-      padding: 80px 1.25rem 4rem; /* 80px = navbar + top padding */
+      padding: 80px 1.25rem 4rem; /* 60 navbar + 20 spacing */
       min-height: calc(calc(var(--vh, 1vh) * 100) - 80px);
     }
 
     .card {
-      background: linear-gradient(135deg, rgba(11, 15, 42, 0.95), rgba(5, 7, 24, 0.95));
+      background: linear-gradient(135deg, rgba(11, 15, 42, 0.96), rgba(5, 7, 24, 0.98));
       border-radius: 20px;
       border: 1px solid var(--border);
-      padding: 2.5rem;
-      box-shadow: 0 30px 100px rgba(0, 0, 0, 0.8);
+      padding: 2.5rem 2rem;
+      box-shadow: 0 30px 100px rgba(0, 0, 0, 0.85);
     }
 
     .breadcrumbs {
@@ -94,22 +123,29 @@
       text-decoration: none;
     }
 
-    .breadcrumbs a:hover { color: var(--text); }
+    .breadcrumbs a:hover {
+      color: var(--text);
+      text-decoration: underline;
+    }
 
     .article-title {
       font-size: 2.2rem;
       font-weight: 700;
       margin-bottom: 0.75rem;
-      line-height: 1.15;
+      line-height: 1.2;
       color: var(--text);
     }
 
     .article-meta {
       font-size: 0.85rem;
       text-transform: uppercase;
-      letter-spacing: 0.1em;
+      letter-spacing: 0.11em;
       color: var(--muted);
       margin-bottom: 2.5rem;
+    }
+
+    .article-content {
+      line-height: 1.7;
     }
 
     .article-content h2 {
@@ -120,18 +156,19 @@
     }
 
     .article-content h3 {
-      font-size: 1.25rem;
+      font-size: 1.2rem;
       font-weight: 600;
       margin: 2rem 0 1rem;
       color: var(--accent-blue);
     }
 
     .article-content p {
-      margin-bottom: 1.5rem;
+      margin-bottom: 1.4rem;
       color: #d5d9ff;
     }
 
-    .article-content ul, .article-content ol {
+    .article-content ul,
+    .article-content ol {
       margin: 1.25rem 0 1.5rem 1.5rem;
     }
 
@@ -141,10 +178,10 @@
     }
 
     .article-content code {
-      background: rgba(127, 90, 240, 0.15);
+      background: rgba(127, 90, 240, 0.18);
       padding: 0.25rem 0.5rem;
       border-radius: 6px;
-      font-family: 'SF Mono', monospace;
+      font-family: "SF Mono", Menlo, Monaco, Consolas, monospace;
       font-size: 0.9em;
       color: var(--accent);
       border: 1px solid rgba(127, 90, 240, 0.3);
@@ -157,29 +194,35 @@
       border: 1px solid var(--border);
       overflow-x: auto;
       margin: 1.5rem 0;
-      font-family: 'SF Mono', monospace;
+      font-family: "SF Mono", Menlo, Monaco, Consolas, monospace;
       font-size: 0.9em;
+    }
+
+    .article-content pre code {
+      background: none;
+      padding: 0;
+      border: none;
     }
 
     .tag-list {
       display: flex;
       flex-wrap: wrap;
-      gap: 0.75rem;
+      gap: 0.6rem;
       margin-top: 2.5rem;
       padding-top: 2rem;
       border-top: 1px solid var(--border);
     }
 
     .tag-pill {
-      padding: 0.4rem 1rem;
-      border-radius: 25px;
-      font-size: 0.85rem;
-      background: rgba(127, 90, 240, 0.2);
+      padding: 0.35rem 0.9rem;
+      border-radius: 999px;
+      font-size: 0.82rem;
+      background: rgba(127, 90, 240, 0.22);
       color: var(--text);
       border: 1px solid rgba(127, 90, 240, 0.4);
       text-decoration: none;
       font-weight: 500;
-      transition: all 0.2s ease;
+      transition: all 0.18s ease;
     }
 
     .tag-pill:hover {
@@ -188,11 +231,26 @@
     }
 
     @media (max-width: 768px) {
-      .navbar { padding: 0 1rem; height: 55px; }
-      .page { padding-top: 75px; }
-      .card { padding: 2rem 1.5rem; }
-      .article-title { font-size: 1.8rem; }
-      .nav-links { gap: 1.5rem; }
+      .navbar {
+        padding: 0 1rem;
+        height: 55px;
+      }
+
+      .page {
+        padding: 75px 1rem 3rem;
+      }
+
+      .card {
+        padding: 2rem 1.5rem;
+      }
+
+      .article-title {
+        font-size: 1.8rem;
+      }
+
+      .nav-links {
+        gap: 1.25rem;
+      }
     }
   </style>
 </head>
@@ -200,7 +258,7 @@
   <header class="navbar">
     <div class="nav-title">C‑Wiki</div>
     <nav class="nav-links">
-      <a href="index.html">Home</a>
+      <a href="home">Home</a>
       <a href="structure.html">Structure</a>
     </nav>
   </header>
@@ -208,75 +266,173 @@
   <main class="page">
     <article class="card">
       <div class="breadcrumbs">
-        <a href="index.html">Home</a> › Structure › 
-        <span id="breadcrumbTitle">Installation</span>
+        <a href="home">Home</a> ›
+        <a href="art/structure">Structure</a> ›
+        <span id="breadcrumbTitle">Article</span>
       </div>
 
-      <h1 class="article-title" id="articleTitle">Installation</h1>
+      <h1 class="article-title" id="articleTitle">Article</h1>
       <div class="article-meta" id="articleMeta">
-        Basics · Updated 2 hours ago
+        Section · Updated just now
       </div>
 
       <div class="article-content" id="articleContent">
-        <p>Install CWiki tools using your preferred package manager. Supports all major platforms.</p>
-
-        <h2>Prerequisites</h2>
-        <ul>
-          <li>Node.js 18+ or Python 3.9+</li>
-          <li>Git 2.30+</li>
-          <li>50MB disk space</li>
-        </ul>
-
-        <h2>Quick Install</h2>
-        <p>Choose your platform:</p>
-        <h3>npm (Recommended)</h3>
-        <pre><code>npm install -g @cwik/tools</code></pre>
-        <h3>pip</h3>
-        <pre><code>pip install cwik-tools</code></pre>
-
-        <h2>Verify Installation</h2>
-        <pre><code>cwiki --version
-cwiki doctor</code></pre>
-
-        <h2>Next Steps</h2>
-        <p>Configure your environment with the <a href="article.html?slug=configuration">Configuration</a> guide.</p>
-
-        <div class="tag-list">
-          <a href="#" class="tag-pill">setup</a>
-          <a href="#" class="tag-pill">packages</a>
-          <a href="#" class="tag-pill">nodejs</a>
-          <a href="#" class="tag-pill">python</a>
-        </div>
+        <!-- Default content if no slug is present -->
+        <p>
+          This is a sample article. Use the <code>slug</code> parameter in the URL
+          (for example: <code>article.html?slug=getting-started</code>) to load
+          specific content.
+        </p>
       </div>
+
+      <div class="tag-list" id="tagList"></div>
     </article>
   </main>
 
   <script>
-    /* KALI-STYLE: Lock viewport height - URL bar can't shrink layout */
+    // Lock viewport height so mobile URL bar shrinking does not cause jumps
     function setVh() {
-      let vh = window.innerHeight * 0.01;
-      document.documentElement.style.setProperty('--vh', `${vh}px`);
+      const vh = window.innerHeight * 0.01;
+      document.documentElement.style.setProperty("--vh", `${vh}px`);
     }
     setVh();
-    window.addEventListener('resize', setVh);
-    window.addEventListener('orientationchange', () => { setTimeout(setVh, 100); });
+    window.addEventListener("resize", setVh);
+    window.addEventListener("orientationchange", () => {
+      setTimeout(setVh, 100);
+    });
 
-    /* Article rendering */
-    const ARTICLES = {
-      "getting-started": {title: "Getting started", category: "Basics", html: `<p>Quick intro to CWiki.</p>`},
-      "installation": {title: "Installation", category: "Basics", html: document.getElementById("articleContent").innerHTML},
-      "configuration": {title: "Configuration", category: "Basics", html: `<p>Configure CWiki tools.</p>`},
-      "faq": {title: "FAQ", category: "Guides", html: `<p>Frequently asked questions.</p>`}
+    // Article "database" – keep slugs in sync with your search JS
+    const ARTICLE_DATA = {
+      "getting-started": {
+        title: "Getting started",
+        category: "Basics",
+        tags: ["intro", "overview"],
+        html: `
+          <p>Welcome to CWiki. This article helps you get started quickly.</p>
+          <h2>What is CWiki?</h2>
+          <p>CWiki is a lightweight wiki for your GitHub Pages project.</p>
+          <h2>First steps</h2>
+          <ul>
+            <li>Open the <code>index.html</code> home page.</li>
+            <li>Use the search bar to find existing articles.</li>
+            <li>Follow the <a href="article.html?slug=installation">Installation</a> article to set up tools.</li>
+          </ul>
+        `
+      },
+      "installation": {
+        title: "Installation",
+        category: "Basics",
+        tags: ["setup", "packages"],
+        html: `
+          <p>Install CWiki tools using your preferred package manager. Supports all major platforms.</p>
+          <h2>Prerequisites</h2>
+          <ul>
+            <li>Node.js 18+ or Python 3.9+</li>
+            <li>Git 2.30+</li>
+            <li>50MB free disk space</li>
+          </ul>
+          <h2>Quick install</h2>
+          <p>Choose your platform:</p>
+          <h3>npm (recommended)</h3>
+          <pre><code>npm install -g @cwik/tools</code></pre>
+          <h3>pip</h3>
+          <pre><code>pip install cwik-tools</code></pre>
+          <h2>Verify installation</h2>
+          <pre><code>cwiki --version
+cwiki doctor</code></pre>
+          <h2>Next steps</h2>
+          <p>Configure your environment with the <a href="article.html?slug=configuration">Configuration</a> guide.</p>
+        `
+      },
+      "configuration": {
+        title: "Configuration",
+        category: "Basics",
+        tags: ["config", "settings"],
+        html: `
+          <p>Configuration lets you customize how CWiki behaves.</p>
+          <h2>Config file</h2>
+          <p>Create a <code>cwiki.config.json</code> file in your project root.</p>
+          <h2>Common options</h2>
+          <ul>
+            <li><code>theme</code> – switch between light and dark modes.</li>
+            <li><code>searchIndex</code> – control which pages are searchable.</li>
+          </ul>
+        `
+      },
+      "faq": {
+        title: "FAQ",
+        category: "Guides",
+        tags: ["questions"],
+        html: `
+          <p>This article answers common questions about CWiki.</p>
+          <h2>Where are articles stored?</h2>
+          <p>They are defined in JavaScript in <code>ARTICLE_DATA</code> when using the slug-based template.</p>
+          <h2>Can I use separate HTML files?</h2>
+          <p>Yes – then you link directly to those files instead of using <code>article.html?slug=...</code>.</p>
+        `
+      }
     };
 
-    const params = new URLSearchParams(location.search);
-    const slug = params.get("slug") || "installation";
-    const data = ARTICLES[slug] || ARTICLES["installation"];
+    function getQueryParams() {
+      const params = {};
+      const search = window.location.search.substring(1);
+      search.split("&").forEach(pair => {
+        if (!pair) return;
+        const [k, v] = pair.split("=");
+        params[decodeURIComponent(k)] = decodeURIComponent(v || "");
+      });
+      return params;
+    }
 
-    document.getElementById("articleTitle").textContent = data.title;
-    document.getElementById("breadcrumbTitle").textContent = data.title;
-    document.getElementById("articleMeta").innerHTML = `${data.category} · <span style="color:var(--accent-blue)">Updated 2 hours ago</span>`;
-    document.title = `C‑Wiki · ${data.title}`;
+    function renderArticle() {
+      const params = getQueryParams();
+      const slug = params.slug;
+      const query = params.q;
+
+      const titleEl = document.getElementById("articleTitle");
+      const metaEl = document.getElementById("articleMeta");
+      const contentEl = document.getElementById("articleContent");
+      const crumbEl = document.getElementById("breadcrumbTitle");
+      const tagListEl = document.getElementById("tagList");
+
+      if (slug && ARTICLE_DATA[slug]) {
+        const data = ARTICLE_DATA[slug];
+
+        titleEl.textContent = data.title;
+        crumbEl.textContent = data.title;
+        metaEl.innerHTML = `${data.category} · <span style="color: var(--accent-blue);">Updated 2 hours ago</span>`;
+        contentEl.innerHTML = data.html;
+
+        tagListEl.innerHTML = (data.tags || [])
+          .map(tag => `<a href="article.html?slug=faq" class="tag-pill">${tag}</a>`)
+          .join("");
+
+        document.title = `C‑Wiki · ${data.title}`;
+      } else if (query) {
+        const safe = query.replace(/</g, "&lt;").replace(/>/g, "&gt;");
+        titleEl.textContent = "Article not found";
+        crumbEl.textContent = "Article not found";
+        metaEl.textContent = "Search · No results";
+        contentEl.innerHTML = `
+          <p>No article matches "${safe}".</p>
+          <p>Try different keywords or go back to the <a href="index.html">home page</a>.</p>
+        `;
+        tagListEl.innerHTML = "";
+        document.title = "C‑Wiki · Article not found";
+      } else {
+        // default sample article (no slug)
+        titleEl.textContent = "Sample article";
+        crumbEl.textContent = "Sample article";
+        metaEl.textContent = "Example · Updated just now";
+        document.title = "C‑Wiki · Sample article";
+      }
+    }
+
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", renderArticle);
+    } else {
+      renderArticle();
+    }
   </script>
 </body>
 </html>
