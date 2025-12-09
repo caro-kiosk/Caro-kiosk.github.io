@@ -21,18 +21,17 @@
     * {
       box-sizing: border-box;
     }
-    
-    html, body {
-    height: 100%;
-    margin: 0;
-    background: radial-gradient(circle at top, #101632 0%, #050718 55%, #020310 100%);
-    background-attachment: fixed;
-    background-repeat: no-repeat;
-    background-size: cover;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-    color: var(--text);
-    }
 
+    html, body {
+      height: 100%;
+      margin: 0;
+      background: radial-gradient(circle at top, #101632 0%, #050718 55%, #020310 100%);
+      background-attachment: fixed;
+      background-repeat: no-repeat;
+      background-size: cover;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--text);
+    }
 
     /* Top nav */
     .navbar {
@@ -293,10 +292,6 @@
       font-weight: 600;
     }
 
-    .search-result-title span {
-      color: var(--accent-blue);
-    }
-
     .search-result-desc {
       font-size: 0.8rem;
       color: var(--muted);
@@ -321,6 +316,86 @@
       border: 1px solid rgba(127, 90, 240, 0.35);
     }
 
+    /* Article widgets grid (kali tools-style cards) */
+    .article-widgets {
+      margin-top: 3rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .article-widget {
+      background: linear-gradient(135deg, rgba(11, 15, 42, 0.96), rgba(5, 7, 24, 0.98));
+      border-radius: 18px;
+      border: 1px solid var(--border);
+      padding: 1.25rem 1.1rem 1.2rem;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.85);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .article-widget-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 0.75rem;
+    }
+
+    .article-widget-title {
+      font-size: 0.95rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .article-widget-count {
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    .article-widget-count span {
+      color: var(--accent-blue);
+      font-weight: 600;
+    }
+
+    .article-widget-list {
+      list-style: none;
+      padding: 0;
+      margin: 0.25rem 0 0;
+    }
+
+    .article-widget-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.4rem 0.2rem;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background 0.12s ease-out, transform 0.06s ease-out;
+    }
+
+    .article-widget-item:hover {
+      background: radial-gradient(circle at left, rgba(127, 90, 240, 0.22), transparent 60%);
+      transform: translateY(-1px);
+    }
+
+    .article-widget-main {
+      min-width: 0;
+    }
+
+    .article-widget-name {
+      font-size: 0.9rem;
+      font-weight: 500;
+    }
+
+    .article-widget-meta {
+      font-size: 0.75rem;
+      color: var(--muted);
+      margin-left: 0.5rem;
+      white-space: nowrap;
+    }
+
     @media (max-width: 720px) {
       .home-title {
         font-size: 1.7rem;
@@ -337,7 +412,6 @@
       <a href="art/sample">Sample article</a>
     </nav>
   </header>
-
 
   <main class="page">
     <section class="home-hero">
@@ -373,6 +447,11 @@
         <ul class="search-results-list" id="resultsList"></ul>
       </div>
     </section>
+
+    <!-- Article widgets like kali.org/tools cards -->
+    <section class="article-widgets" id="articleWidgets">
+      <!-- filled by JS -->
+    </section>
   </main>
 
   <script>
@@ -381,37 +460,42 @@
       {
         slug: "getting-started",
         title: "Getting started",
-        category: "Basics",
+        section: "Basics",
+        category: "Intro",
         tags: ["intro", "overview"],
         description: "Quick introduction to CWiki and how to use this documentation."
       },
       {
         slug: "installation",
         title: "Installation",
-        category: "Basics",
+        section: "Basics",
+        category: "Setup",
         tags: ["setup", "packages"],
         description: "How to install tools, generators and packages for your environment."
       },
       {
         slug: "configuration",
         title: "Configuration",
-        category: "Basics",
+        section: "Basics",
+        category: "Settings",
         tags: ["config", "settings"],
         description: "Configure CWiki tools, adjust settings and customize behaviour."
       },
       {
         slug: "faq",
         title: "FAQ",
-        category: "Guides",
+        section: "Guides",
+        category: "Help",
         tags: ["questions"],
         description: "Frequently asked questions and troubleshooting tips."
       },
       {
         slug: "article_generation",
         title: "Generate Articles",
-        category: "Guides",
-        tags: ["questions"],
-        description: "Learn how to use this wiki. In future also the news page"
+        section: "Guides",
+        category: "Meta",
+        tags: ["wiki", "how-to"],
+        description: "Learn how to use this wiki and generate new articles."
       }
     ];
 
@@ -508,7 +592,6 @@
       const query = (input.value || "").trim();
       if (!query) return false;
 
-      // Try exact slug/title first
       const qSlug = slugify(query);
       let match = ARTICLES.find(a => a.slug === qSlug);
       if (!match) {
@@ -519,10 +602,67 @@
       if (match) {
         window.location.href = "article.html?slug=" + encodeURIComponent(match.slug);
       } else {
-        // Show filtered results
         renderResults(query);
       }
       return false;
+    }
+
+    // Article widgets, grouped by section
+    function buildWidgets() {
+      const container = document.getElementById("articleWidgets");
+      if (!container) return;
+
+      const bySection = {};
+      ARTICLES.forEach(a => {
+        const section = a.section || "Other";
+        if (!bySection[section]) bySection[section] = [];
+        bySection[section].push(a);
+      });
+
+      const sectionNames = Object.keys(bySection).sort((a, b) => {
+        if (a === "Basics") return -1;
+        if (b === "Basics") return 1;
+        return a.localeCompare(b);
+      });
+
+      container.innerHTML = sectionNames
+        .map(section => {
+          const items = bySection[section].sort((a, b) =>
+            a.title.localeCompare(b.title)
+          );
+          const listHtml = items
+            .map(a => `
+              <li class="article-widget-item" data-slug="${a.slug}">
+                <div class="article-widget-main">
+                  <div class="article-widget-name">${a.title}</div>
+                  <div class="article-widget-meta">${a.category || ""}</div>
+                </div>
+              </li>
+            `)
+            .join("");
+          return `
+            <div class="article-widget">
+              <div class="article-widget-header">
+                <div class="article-widget-title">${section}</div>
+                <div class="article-widget-count">
+                  <span>${items.length}</span> articles
+                </div>
+              </div>
+              <ul class="article-widget-list">
+                ${listHtml}
+              </ul>
+            </div>
+          `;
+        })
+        .join("");
+
+      container.querySelectorAll(".article-widget-item").forEach(item => {
+        const slug = item.getAttribute("data-slug");
+        if (!slug) return;
+        item.addEventListener("click", () => {
+          window.location.href = "article.html?slug=" + encodeURIComponent(slug);
+        });
+      });
     }
 
     // Live search on typing
@@ -530,6 +670,8 @@
     searchInput.addEventListener("input", (e) => {
       renderResults(e.target.value || "");
     });
+
+    buildWidgets();
   </script>
 </body>
 </html>
