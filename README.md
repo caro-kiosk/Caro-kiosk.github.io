@@ -1,6 +1,6 @@
 # Caro-kiosk.github.io
 
-The unofficial website of the Caro Kiosk. We try to create the best experience for you, for us, and for the whole community.
+The unofficial website of the Caro Kiosk. We try to create the best experience for you, for us, and for the whole community. Take a look at our work [here](https://caro-kiosk.github.io/).
 
 # News
 
