@@ -8,43 +8,43 @@ The unofficial website of the Caro Kiosk. We try to create the best experience f
 -Restrucured article handeling inside the wiki
 
 # Structure
-
-assets/
-    ├── AP.png
-    ├── article3.jpg
-    ├── banner-art2.jpg
-    ├── banner-art2p02.png
-    ├── banner1-art4.jpg
-    ├── banner1.jpg
-    ├── banner2.jpg
-    ├── error000.png
-    └── Media.md
-news/
-    ├── Articles.md
-    ├── der-ethische-konsum-von-brot-in-deutschland.html
-    ├── introducing-caro-kiosk-home.html
-    ├── our-team-and-suporters.html
-    └── to-do.html
-tools/
-    ├── article-generator/
-        ├── main.py
-        └── Template-Article.html
-    └── STRUCTURE.MD
-wiki/
-    ├── art/
-        ├── sample.html
-        └── structure.html
-    ├── article.html
-    └── home.html
-404.html
-about.html
-apple-touch-icon.png
-dev.html
-favicon.ico
-index.html
-LICENSE
-license.html
-newspaper.html
-opening-hours.html
-prices.html
+<br>
+assets/<br>
+    ├── AP.png<br>
+    ├── article3.jpg<br>
+    ├── banner-art2.jpg<br>
+    ├── banner-art2p02.png<br>
+    ├── banner1-art4.jpg<br>
+    ├── banner1.jpg<br>
+    ├── banner2.jpg<br>
+    ├── error000.png<br>
+    └── Media.md<br>
+news/<br>
+    ├── Articles.md<br>
+    ├── der-ethische-konsum-von-brot-in-deutschland.html<br>
+    ├── introducing-caro-kiosk-home.html<br>
+    ├── our-team-and-suporters.html<br>
+    └── to-do.html<br>
+tools/<br>
+    ├── article-generator/<br>
+        ├── main.py<br>
+        └── Template-Article.html<br>
+    └── STRUCTURE.MD<br>
+wiki/<br>
+    ├── art/<br>
+        ├── sample.html<br>
+        └── structure.html<br>
+    ├── article.html<br>
+    └── home.html<br>
+404.html<br>
+about.html<br>
+apple-touch-icon.png<br>
+dev.html<br>
+favicon.ico<br>
+index.html<br>
+LICENSE<br>
+license.html<br>
+newspaper.html<br>
+opening-hours.html<br>
+prices.html<br>
 README.md
