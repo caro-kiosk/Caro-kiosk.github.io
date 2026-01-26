@@ -1,1 +1,14 @@
-
+{
+  "sources": {
+    "Folha de S.Paulo": "https://www.folha.uol.com.br - Größte brasilianische Tageszeitung",
+    "Frankfurter Allgemeine Zeitung": "https://www.faz.net - Seriöse deutsche Qualitätszeitung",
+    "The Hindu": "https://www.thehindu.com - Führende indische englischsprachige Zeitung",
+    "The Wall Street Journal": "https://www.wsj.com - Weltweit führende Wirtschaftszeitung",
+    "Mail & Guardian": "https://mg.co.za - Unabhängige südafrikanische Wochenzeitung",
+    "NHK World": "https://www3.nhk.or.jp/nhkworld - Öffentlich-rechtlicher japanischer Sender",
+    "Le Monde": "https://www.lemonde.fr - Französische Referenzzeitung",
+    "Premium Times": "https://www.premiumtimesng.com - Unabhängige nigerianische Nachrichten"
+  },
+  "methodology": "News aus seriösen, international anerkannten Quellen. Keine Boulevardpresse. Fokus auf Vielfalt.",
+  "last_updated": "2026-01-26"
+}
