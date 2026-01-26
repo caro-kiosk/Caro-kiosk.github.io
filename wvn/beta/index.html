@@ -15,11 +15,10 @@
       --text: #e5e9ff;
       --muted: #a0a4c0;
       --border: rgba(255, 255, 255, 0.06);
+      --error: #ef4444;
     }
 
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
 
     html, body {
       height: 100%;
@@ -30,7 +29,7 @@
       color: var(--text);
     }
 
-    /* Top nav */
+    /* Navbar */
     .navbar {
       display: flex;
       justify-content: space-between;
@@ -58,57 +57,38 @@
       margin-left: 1.25rem;
       font-size: 0.9rem;
       position: relative;
+      cursor: pointer;
     }
 
+    .nav-links a.active { color: var(--accent-blue); }
     .nav-links a::after {
       content: "";
       position: absolute;
-      left: 0;
-      bottom: -0.25rem;
-      width: 0;
-      height: 2px;
+      left: 0; bottom: -0.25rem;
+      width: 0; height: 2px;
       border-radius: 999px;
       background: linear-gradient(90deg, var(--accent), var(--accent-blue));
       transition: width 0.2s ease-out;
     }
 
-    .nav-links a:hover {
-      color: var(--text);
-    }
+    .nav-links a:hover::after { width: 100%; }
 
-    .nav-links a:hover::after {
-      width: 100%;
-    }
+    .page { max-width: 960px; margin: 0 auto; padding: 2.5rem 1.25rem 4rem; }
 
-    .page {
-      max-width: 960px;
-      margin: 0 auto;
-      padding: 2.5rem 1.25rem 4rem;
-    }
+    /* Hero */
+    .news-hero { text-align: center; margin-top: 5vh; margin-bottom: 3rem; }
 
-    /* News Hero */
-    .news-hero {
-      text-align: center;
-      margin-top: 5vh;
-      margin-bottom: 3rem;
-    }
-
-    /* Glitchy News Logo */
     .glitch-news-logo {
       position: relative;
-      width: 140px;
-      height: 140px;
+      width: 140px; height: 140px;
       margin: 0 auto 2rem;
     }
 
-    .glitch-n-base,
-    .glitch-n-layer {
-      position: absolute;
-      inset: 0;
+    .glitch-n-base, .glitch-n-layer {
+      position: absolute; inset: 0;
       border-radius: 50%;
       border: 3px solid var(--accent-blue);
-      box-shadow: 0 0 18px rgba(60, 141, 255, 0.5),
-                  0 0 36px rgba(127, 90, 240, 0.25);
+      box-shadow: 0 0 18px rgba(60, 141, 255, 0.5), 0 0 36px rgba(127, 90, 240, 0.25);
     }
 
     .glitch-n-layer {
@@ -118,38 +98,29 @@
     }
 
     .glitch-n-shape {
-      position: absolute;
-      inset: 18%;
-      width: 64%;
-      height: 36%;
+      position: absolute; inset: 18%;
+      width: 64%; height: 36%;
       background: var(--accent-blue);
       border-radius: 4px 0 12px 4px;
-      box-shadow: 
-        0 0 16px rgba(60, 141, 255, 0.7),
-        0 0 30px rgba(127, 90, 240, 0.4);
+      box-shadow: 0 0 16px rgba(60, 141, 255, 0.7), 0 0 30px rgba(127, 90, 240, 0.4);
       transform: rotate(45deg);
-      top: 32%;
-      left: 18%;
+      top: 32%; left: 18%;
     }
 
     .glitch-news-dot {
       position: absolute;
-      width: 24px;
-      height: 24px;
+      width: 24px; height: 24px;
       border-radius: 50%;
       background: radial-gradient(circle, #ffe8c2 0, var(--accent-orange) 40%, #b64700 100%);
-      box-shadow:
-        0 0 12px rgba(255, 159, 67, 0.9),
-        0 0 28px rgba(255, 159, 67, 0.7);
-      top: 50%;
-      left: 50%;
+      box-shadow: 0 0 12px rgba(255, 159, 67, 0.9), 0 0 28px rgba(255, 159, 67, 0.7);
+      top: 50%; left: 50%;
       transform: translate(-50%, -50%);
     }
 
     @keyframes glitch {
-      0%   { transform: translate(0, 0); filter: hue-rotate(0deg); }
-      35%  { transform: translate(-2px, 1px); }
-      70%  { transform: translate(2px, -1px); }
+      0% { transform: translate(0, 0); filter: hue-rotate(0deg); }
+      35% { transform: translate(-2px, 1px); }
+      70% { transform: translate(2px, -1px); }
       100% { transform: translate(-1px, 1px); filter: hue-rotate(45deg); }
     }
 
@@ -172,7 +143,55 @@
       margin: 0 auto 2.5rem;
     }
 
-    /* Search bar */
+    /* API Key Input */
+    .api-key-section {
+      background: linear-gradient(135deg, rgba(11, 15, 42, 0.9), rgba(5, 7, 24, 0.9));
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+      text-align: center;
+    }
+
+    .api-key-input {
+      display: flex;
+      gap: 0.75rem;
+      max-width: 500px;
+      margin: 0 auto 1rem;
+    }
+
+    .api-key-field {
+      flex: 1;
+      padding: 0.85rem 1.1rem;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.03);
+      color: var(--text);
+      font-size: 0.95rem;
+    }
+
+    .api-key-save {
+      padding: 0.85rem 1.5rem;
+      background: linear-gradient(135deg, var(--accent), var(--accent-blue));
+      border: none;
+      border-radius: 12px;
+      color: white;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .api-status {
+      padding: 0.5rem 1rem;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 500;
+      margin-top: 0.5rem;
+    }
+
+    .api-status.valid { background: rgba(34, 197, 94, 0.2); color: #22c55e; }
+    .api-status.invalid { background: rgba(239, 68, 68, 0.2); color: var(--error); }
+
+    /* Search */
     .search-box {
       display: flex;
       width: min(480px, 100%);
@@ -181,47 +200,10 @@
       overflow: hidden;
       border: 1px solid var(--border);
       background: radial-gradient(circle at top left, rgba(127, 90, 240, 0.18), rgba(5, 7, 24, 0.9));
-      box-shadow:
-        0 18px 60px rgba(0, 0, 0, 0.8),
-        0 0 0 1px rgba(255, 255, 255, 0.02);
+      box-shadow: 0 18px 60px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(255, 255, 255, 0.02);
     }
 
-    .search-input {
-      flex: 1;
-      padding: 0.85rem 1.1rem;
-      border: none;
-      outline: none;
-      background: transparent;
-      color: var(--text);
-      font-size: 0.95rem;
-    }
-
-    .search-input::placeholder {
-      color: var(--muted);
-    }
-
-    .search-button {
-      border: none;
-      padding: 0.85rem 1.3rem;
-      background: linear-gradient(135deg, var(--accent), var(--accent-blue));
-      color: #fff;
-      font-weight: 500;
-      cursor: pointer;
-      font-size: 0.95rem;
-      border-radius: 999px;
-      margin: 0.15rem;
-      box-shadow: 0 0 18px rgba(60, 141, 255, 0.65);
-      transition: transform 0.12s ease-out, box-shadow 0.12s ease-out;
-    }
-
-    .search-button:hover {
-      transform: translateY(-1px);
-      box-shadow:
-        0 0 24px rgba(60, 141, 255, 0.85),
-        0 0 45px rgba(127, 90, 240, 0.65);
-    }
-
-    /* News Grid */
+    /* News Grid & Cards - identisch wie vorher */
     .news-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -229,7 +211,6 @@
       margin-top: 2rem;
     }
 
-    /* News Cards */
     .news-card {
       background: linear-gradient(135deg, rgba(11, 15, 42, 0.96), rgba(5, 7, 24, 0.98));
       border-radius: 18px;
@@ -245,9 +226,7 @@
     .news-card::before {
       content: '';
       position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
+      top: 0; left: 0; right: 0;
       height: 3px;
       background: linear-gradient(90deg, var(--accent), var(--accent-blue), var(--accent-orange));
       transform: scaleX(0);
@@ -260,16 +239,9 @@
       border-color: rgba(127, 90, 240, 0.3);
     }
 
-    .news-card:hover::before {
-      transform: scaleX(1);
-    }
+    .news-card:hover::before { transform: scaleX(1); }
 
-    .news-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      margin-bottom: 1rem;
-    }
+    .news-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1rem; }
 
     .country-badge {
       padding: 0.3rem 0.8rem;
@@ -296,24 +268,12 @@
     }
 
     .news-card:hover .debate-btn {
-      opacity: 1;
-      transform: translateY(0);
+      opacity: 1; transform: translateY(0);
       background: rgba(127, 90, 240, 0.4);
     }
 
-    .news-title {
-      font-size: 1.1rem;
-      font-weight: 600;
-      margin-bottom: 0.75rem;
-      line-height: 1.4;
-    }
-
-    .news-summary {
-      color: var(--muted);
-      font-size: 0.9rem;
-      margin-bottom: 1rem;
-      line-height: 1.5;
-    }
+    .news-title { font-size: 1.1rem; font-weight: 600; margin-bottom: 0.75rem; line-height: 1.4; }
+    .news-summary { color: var(--muted); font-size: 0.9rem; margin-bottom: 1rem; line-height: 1.5; }
 
     .news-footer {
       display: flex;
@@ -328,40 +288,27 @@
       text-decoration: none;
     }
 
-    .news-source:hover {
-      text-decoration: underline;
-    }
+    .news-source:hover { text-decoration: underline; }
+    .news-date { color: var(--muted); }
 
-    .news-date {
-      color: var(--muted);
-    }
-
-    /* Perplexity Modal */
+    /* Modal - identisch wie vorher */
     .modal {
       display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
+      position: fixed; top: 0; left: 0;
+      width: 100%; height: 100%;
       background: rgba(0, 0, 0, 0.85);
       backdrop-filter: blur(12px);
       z-index: 1000;
       animation: modalFadeIn 0.3s ease;
     }
 
-    @keyframes modalFadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
+    @keyframes modalFadeIn { from { opacity: 0; } to { opacity: 1; } }
 
     .modal-content {
       position: absolute;
-      top: 50%;
-      left: 50%;
+      top: 50%; left: 50%;
       transform: translate(-50%, -50%);
-      width: 90%;
-      max-width: 700px;
+      width: 90%; max-width: 700px;
       max-height: 85vh;
       background: linear-gradient(135deg, rgba(11, 15, 42, 0.98), rgba(5, 7, 24, 0.98));
       border: 1px solid var(--border);
@@ -378,17 +325,12 @@
       align-items: center;
     }
 
-    .modal-title {
-      font-size: 1.1rem;
-      font-weight: 600;
-    }
-
+    .modal-title { font-size: 1.1rem; font-weight: 600; }
     .modal-close {
       background: none;
       border: 1px solid var(--border);
       color: var(--muted);
-      width: 36px;
-      height: 36px;
+      width: 36px; height: 36px;
       border-radius: 50%;
       cursor: pointer;
       display: flex;
@@ -397,37 +339,14 @@
       font-size: 1.2rem;
     }
 
-    .modal-close:hover {
-      background: rgba(255, 255, 255, 0.1);
-      color: var(--text);
-    }
+    .modal-close:hover { background: rgba(255, 255, 255, 0.1); color: var(--text); }
 
-    .modal-body {
-      height: 450px;
-      display: flex;
-      flex-direction: column;
-    }
+    .modal-body { height: 450px; display: flex; flex-direction: column; }
+    .chat-container { flex: 1; padding: 1.5rem; overflow-y: auto; }
 
-    .chat-container {
-      flex: 1;
-      padding: 1.5rem;
-      overflow-y: auto;
-    }
-
-    .chat-message {
-      margin-bottom: 1.2rem;
-    }
-
-    .chat-message.ai .message-bubble {
-      background: rgba(60, 141, 255, 0.15);
-      border-left: 3px solid var(--accent-blue);
-    }
-
-    .message-bubble {
-      padding: 1rem 1.25rem;
-      border-radius: 12px;
-      backdrop-filter: blur(10px);
-    }
+    .chat-message { margin-bottom: 1.2rem; }
+    .chat-message.ai .message-bubble { background: rgba(60, 141, 255, 0.15); border-left: 3px solid var(--accent-blue); }
+    .message-bubble { padding: 1rem 1.25rem; border-radius: 12px; backdrop-filter: blur(10px); }
 
     .chat-input-container {
       padding: 1.5rem;
@@ -446,9 +365,7 @@
       font-size: 0.95rem;
     }
 
-    .chat-input::placeholder {
-      color: var(--muted);
-    }
+    .chat-input::placeholder { color: var(--muted); }
 
     .analyze-btn {
       padding: 0.85rem 1.5rem;
@@ -466,32 +383,20 @@
       box-shadow: 0 0 30px rgba(60, 141, 255, 0.8);
     }
 
-    /* Loading */
     .loading {
       text-align: center;
       padding: 4rem;
       color: var(--muted);
       grid-column: 1/-1;
+      font-size: 1.1rem;
     }
 
     @media (max-width: 720px) {
-      .news-title {
-        font-size: 1.7rem;
-      }
-      
-      .news-grid {
-        grid-template-columns: 1fr;
-        gap: 1rem;
-      }
-      
-      .navbar {
-        padding: 0.75rem 1rem;
-      }
-      
-      .nav-links a {
-        margin-left: 0.75rem;
-        font-size: 0.85rem;
-      }
+      .news-title { font-size: 1.7rem; }
+      .news-grid { grid-template-columns: 1fr; gap: 1rem; }
+      .navbar { padding: 0.75rem 1rem; }
+      .nav-links a { margin-left: 0.75rem; font-size: 0.85rem; }
+      .api-key-input { flex-direction: column; }
     }
   </style>
 </head>
@@ -499,18 +404,17 @@
   <header class="navbar">
     <div class="nav-title">Nachrichten aus aller Welt</div>
     <nav class="nav-links">
-      <a href="#" data-filter="all">Alle</a>
-      <a href="#" data-filter="politik">Politik</a>
-      <a href="#" data-filter="wirtschaft">Wirtschaft</a>
-      <a href="#" data-filter="welt">Welt</a>
-      <a href="#" data-filter="technik">Technik</a>
+      <a data-filter="all" class="active">Alle</a>
+      <a data-filter="politik">Politik</a>
+      <a data-filter="wirtschaft">Wirtschaft</a>
+      <a data-filter="technologie">Technologie</a>
+      <a data-filter="welt">Welt</a>
     </nav>
   </header>
 
   <main class="page">
     <section class="news-hero">
-      <!-- Glitchy News Logo -->
-      <div class="glitch-news-logo" aria-hidden="true">
+      <div class="glitch-news-logo">
         <div class="glitch-n-base"></div>
         <div class="glitch-n-layer"></div>
         <div class="glitch-n-shape"></div>
@@ -519,32 +423,29 @@
 
       <h1 class="news-title">Nachrichten aus aller Welt</h1>
       <p class="news-subtitle">
-        Seriöse Berichterstattung aus internationalen Quellen. Perplexity AI Analysen verfügbar.
+        Live Nachrichten aus 80+ Ländern. Perplexity AI Analysen verfügbar.
       </p>
 
+      <!-- NewsAPI Key Eingabe -->
+      <div class="api-key-section">
+        <div style="margin-bottom: 1rem; font-size: 0.95rem;">
+          NewsAPI Key eingeben (kostenlos bei <a href="https://newsapi.org" target="_blank" style="color: var(--accent-blue);">newsapi.org</a>)
+        </div>
+        <div class="api-key-input">
+          <input type="password" class="api-key-field" id="newsApiKey" placeholder="pplx-your-newsapi-key-here">
+          <button class="api-key-save" onclick="saveApiKey()">Speichern</button>
+        </div>
+        <div id="apiStatus" class="api-status" style="display: none;"></div>
+      </div>
+
       <form class="search-box" id="searchForm">
-        <input
-          class="search-input"
-          type="search"
-          placeholder="Nach Ländern, Themen oder Quellen suchen…"
-          id="searchInput"
-        />
+        <input class="search-input" type="search" id="searchInput" placeholder="Nach Ländern, Themen oder Quellen suchen…">
         <button class="search-button" type="submit">Suchen</button>
       </form>
-
-      <!-- Filter Results -->
-      <div class="search-results" id="searchResults" hidden>
-        <div class="search-results-header">
-          <span id="resultsCount">Tippe um zu suchen</span>
-          <span id="clearSearch" style="cursor: pointer; opacity: 0.7;">&times;</span>
-        </div>
-        <ul class="search-results-list" id="resultsList"></ul>
-      </div>
     </section>
 
-    <!-- News Grid -->
     <section class="news-grid" id="newsGrid">
-      <div class="loading">📰 Nachrichten werden geladen...</div>
+      <div class="loading">🔄 Lade aktuelle Nachrichten aus aller Welt...</div>
     </section>
   </main>
 
@@ -552,20 +453,13 @@
   <div id="perplexityModal" class="modal">
     <div class="modal-content">
       <div class="modal-header">
-        <h3 class="modal-title" id="modalTitle">AI-Analyse</h3>
-        <button class="modal-close">&times;</button>
+        <h3 class="modal-title" id="modalTitle">🤖 AI-Analyse</h3>
+        <button class="modal-close">×</button>
       </div>
       <div class="modal-body">
-        <div class="chat-container" id="chatContainer">
-          <div class="chat-message ai">
-            <div class="message-bubble">
-              <strong>Perplexity AI:</strong> Ich analysiere Nachrichten aus verschiedenen Perspektiven. 
-              <br><br>Füge deinen API-Key hinzu: <code>PERPLEXITY_API_KEY=pplx-...</code>
-            </div>
-          </div>
-        </div>
+        <div class="chat-container" id="chatContainer"></div>
         <div class="chat-input-container">
-          <input type="text" class="chat-input" id="chatInput" placeholder="Frage stellen oder API-Key eingeben…">
+          <input type="text" class="chat-input" id="chatInput" placeholder="Frage stellen oder PERPLEXITY_API_KEY=...">
           <button class="analyze-btn" id="analyzeBtn">Analysieren</button>
         </div>
       </div>
@@ -573,77 +467,115 @@
   </div>
 
   <script>
-    // News Database
-    const NEWS_ARTICLES = [
-      {
-        id: 1,
-        title: "Lula gewinnt brasilianische Präsidentschaftswahl",
-        country: "🇧🇷 Brasilien",
-        date: "26.01.2026",
-        summary: "Luiz Inácio Lula da Silva besiegt konservativen Gegenkandidaten. Linke Politik kehrt zurück.",
-        source: "Folha de S.Paulo",
-        category: "politik",
-        url: "https://www.folha.uol.com.br"
-      },
-      {
-        id: 2,
-        title: "Deutschland führt CO₂-Steuer ein",
-        country: "🇩🇪 Deutschland",
-        date: "25.01.2026",
-        summary: "Bundestag beschließt neue Klimasteuer ab 2027. Wirtschaftskreise kritisieren zusätzliche Belastung.",
-        source: "Frankfurter Allgemeine Zeitung", 
-        category: "welt",
-        url: "https://www.faz.net"
-      },
-      {
-        id: 3,
-        title: "Indien verbietet chinesische Tech-Apps",
-        country: "🇮🇳 Indien",
-        date: "24.01.2026",
-        summary: "Neue Datenschutzgesetze zwingen TikTok & Co. aus dem Land. Tech-Krieg eskaliert weiter.",
-        source: "The Hindu",
-        category: "technik",
-        url: "https://www.thehindu.com"
-      },
-      {
-        id: 4,
-        title: "USA: Inflation sinkt auf 2,1%",
-        country: "🇺🇸 USA",
-        date: "26.01.2026",
-        summary: "Federal Reserve hält Zinsen stabil. Tech-Aktien steigen nach positiven Zahlen.",
-        source: "The Wall Street Journal",
-        category: "wirtschaft",
-        url: "https://www.wsj.com"
-      },
-      {
-        id: 5,
-        title: "Südafrika: Energiekrise verschärft sich",
-        country: "🇿🇦 Südafrika",
-        date: "25.01.2026",
-        summary: "Eskom meldet erneute Blackouts. Wirtschaft schrumpft durch Stromausfälle.",
-        source: "Mail & Guardian",
-        category: "wirtschaft",
-        url: "https://mg.co.za"
-      }
-    ];
-
     class NewsPortal {
       constructor() {
-        this.filteredNews = [...NEWS_ARTICLES];
+        this.news = [];
+        this.filteredNews = [];
         this.currentArticle = null;
+        this.apiKey = localStorage.getItem('newsApiKey') || '';
         this.init();
       }
 
-      init() {
-        this.renderNews();
+      async init() {
+        const keyInput = document.getElementById('newsApiKey');
+        keyInput.value = this.apiKey;
+
+        if (this.apiKey) {
+          await this.fetchNews();
+        } else {
+          this.showNoKeyMessage();
+        }
+        
         this.setupEventListeners();
       }
 
+      async fetchNews() {
+        const grid = document.getElementById('newsGrid');
+        grid.innerHTML = '<div class="loading">📰 Hole Top-Schlagzeilen aus aller Welt...</div>';
+
+        try {
+          // Multi-Country NewsAPI Call
+          const countries = 'de,us,gb,fr,es,br,in,au,ca'; // Deutschland, USA, UK, FR, ES, BR, IN, AU, CA
+          const url = `https://newsapi.org/v2/top-headlines?` +
+                     `countries=${countries}&` +
+                     `language=de,en&` +
+                     `pageSize=30&` +
+                     `apiKey=${this.apiKey}`;
+
+          const response = await fetch(url);
+          const data = await response.json();
+
+          if (data.status !== 'ok') {
+            throw new Error(data.message || 'API Fehler');
+          }
+
+          this.news = data.articles
+            .filter(article => article.title && article.url) // Nur vollständige Artikel
+            .map(article => ({
+              id: article.url, // Unique ID
+              title: article.title,
+              country: this.getCountryFlag(article.source?.country || 'unknown'),
+              date: article.publishedAt ? new Date(article.publishedAt).toLocaleDateString('de-DE') : 'Heute',
+              summary: article.description?.slice(0, 160) + '...' || 'Keine Zusammenfassung verfügbar',
+              source: article.source?.name || 'Unbekannte Quelle',
+              category: this.categorizeArticle(article.title + ' ' + article.description),
+              url: article.url,
+              image: article.urlToImage || null
+            }))
+            .slice(0, 25); // Top 25
+
+          this.filteredNews = [...this.news];
+          this.renderNews();
+          this.updateApiStatus(true);
+
+        } catch (error) {
+          console.error('NewsAPI Fehler:', error);
+          grid.innerHTML = `
+            <div class="loading" style="color: var(--error);">
+              ❌ API-Fehler: ${error.message}<br>
+              <small>Überprüfe deinen NewsAPI Key bei <a href="https://newsapi.org" target="_blank" style="color: var(--accent-blue);">newsapi.org</a></small>
+            </div>
+          `;
+          this.updateApiStatus(false, error.message);
+        }
+      }
+
+      getCountryFlag(country) {
+        const flags = {
+          'de': '🇩🇪', 'us': '🇺🇸', 'gb': '🇬🇧', 'fr': '🇫🇷',
+          'es': '🇪🇸', 'br': '🇧🇷', 'in': '🇮🇳', 'au': '🇦🇺',
+          'ca': '🇨🇦', 'unknown': '🌍'
+        };
+        return flags[country?.toLowerCase()] || '🌍';
+      }
+
+      categorizeArticle(text) {
+        const lower = text.toLowerCase();
+        if (lower.includes('wirtschaft') || lower.includes('economy') || lower.includes('geld')) return 'wirtschaft';
+        if (lower.includes('tech') || lower.includes('technologie')) return 'technologie';
+        if (lower.includes('politik') || lower.includes('government')) return 'politik';
+        return 'welt';
+      }
+
+      showNoKeyMessage() {
+        document.getElementById('newsGrid').innerHTML = `
+          <div class="loading">
+            🔑 Bitte NewsAPI Key eingeben<br>
+            <small>1. Gehe zu <a href="https://newsapi.org" target="_blank" style="color: var(--accent-blue);">newsapi.org</a><br>
+            2. Kostenlos registrieren (1000 Anfragen/Tag)<br>
+            3. API Key hier einfügen &amp; Speichern
+            </small>
+          </div>
+        `;
+      }
+
       setupEventListeners() {
-        // Navigation Filter
+        // Navigation
         document.querySelectorAll('.nav-links a[data-filter]').forEach(link => {
           link.addEventListener('click', (e) => {
             e.preventDefault();
+            document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+            e.target.classList.add('active');
             this.filterNews(e.target.dataset.filter);
           });
         });
@@ -653,42 +585,28 @@
           this.searchNews(e.target.value);
         });
 
-        // Clear search
-        document.getElementById('clearSearch').addEventListener('click', () => {
-          document.getElementById('searchInput').value = '';
-          this.searchNews('');
-        });
-
-        // Debate buttons
-        document.addEventListener('click', (e) => {
-          if (e.target.classList.contains('debate-btn')) {
-            const card = e.target.closest('.news-card');
-            this.openPerplexityModal(card.dataset.id);
-          }
-        });
-
-        // Modal controls
-        document.querySelector('.modal-close').addEventListener('click', () => {
-          document.getElementById('perplexityModal').style.display = 'none';
-        });
-
-        document.getElementById('analyzeBtn').addEventListener('click', () => {
-          this.sendToPerplexity();
-        });
-
-        document.getElementById('chatInput').addEventListener('keypress', (e) => {
-          if (e.key === 'Enter') this.sendToPerplexity();
+        // API Key Save
+        document.getElementById('newsApiKey').addEventListener('keypress', (e) => {
+          if (e.key === 'Enter') this.saveApiKey();
         });
       }
 
-      filterNews(category) {
-        document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
-        event.target.classList.add('active');
+      async saveApiKey() {
+        const key = document.getElementById('newsApiKey').value.trim();
+        if (!key) return;
 
+        localStorage.setItem('newsApiKey', key);
+        this.apiKey = key;
+        document.getElementById('apiStatus').style.display = 'none';
+        
+        await this.fetchNews();
+      }
+
+      filterNews(category) {
         if (category === 'all') {
-          this.filteredNews = [...NEWS_ARTICLES];
+          this.filteredNews = [...this.news];
         } else {
-          this.filteredNews = NEWS_ARTICLES.filter(n => n.category === category);
+          this.filteredNews = this.news.filter(n => n.category === category);
         }
         this.renderNews();
       }
@@ -696,52 +614,15 @@
       searchNews(query) {
         const q = query.toLowerCase().trim();
         if (!q) {
-          this.filteredNews = [...NEWS_ARTICLES];
-          document.getElementById('searchResults').hidden = true;
+          this.filteredNews = [...this.news];
         } else {
-          this.filteredNews = NEWS_ARTICLES.filter(n =>
+          this.filteredNews = this.news.filter(n =>
             n.title.toLowerCase().includes(q) ||
             n.summary.toLowerCase().includes(q) ||
-            n.country.toLowerCase().includes(q) ||
             n.source.toLowerCase().includes(q)
           );
-          this.renderSearchResults(query);
         }
         this.renderNews();
-      }
-
-      renderSearchResults(query) {
-        const results = this.filteredNews;
-        const panel = document.getElementById('searchResults');
-        const list = document.getElementById('resultsList');
-        const countEl = document.getElementById('resultsCount');
-
-        if (!query.trim()) {
-          panel.hidden = true;
-          return;
-        }
-
-        panel.hidden = false;
-        countEl.textContent = results.length === 1 ? '1 Ergebnis' : `${results.length} Ergebnisse`;
-
-        list.innerHTML = results.slice(0, 8).map(n => `
-          <li class="search-result-item" data-id="${n.id}">
-            <div class="search-result-main">
-              <div class="search-result-title">${n.title}</div>
-              <div class="search-result-desc">${n.summary}</div>
-            </div>
-            <div class="search-result-meta">
-              <div>${n.country}</div>
-              <span class="tag-pill">${n.category}</span>
-            </div>
-          </li>
-        `).join('');
-
-        list.querySelectorAll('.search-result-item').forEach(item => {
-          item.addEventListener('click', () => {
-            this.openPerplexityModal(item.dataset.id);
-          });
-        });
       }
 
       renderNews() {
@@ -754,8 +635,8 @@
         grid.innerHTML = this.filteredNews.map(article => `
           <article class="news-card" data-id="${article.id}">
             <div class="news-header">
-              <span class="country-badge">${article.country}</span>
-              <button class="debate-btn">🤖 AI-Analyse</button>
+              <span class="country-badge">${article.country} ${article.source}</span>
+              <button class="debate-btn" onclick="portal.openPerplexityModal('${article.id}')">🤖 AI</button>
             </div>
             <h3 class="news-title">${article.title}</h3>
             <p class="news-summary">${article.summary}</p>
@@ -767,34 +648,40 @@
         `).join('');
       }
 
-      openPerplexityModal(id) {
-        this.currentArticle = NEWS_ARTICLES.find(n => n.id == id);
-        document.getElementById('modalTitle').textContent = `🤖 Analyse: ${this.currentArticle.title}`;
-        document.getElementById('perplexityModal').style.display = 'block';
+      updateApiStatus(valid, message = '') {
+        const status = document.getElementById('apiStatus');
+        status.textContent = valid ? '✅ API-Key aktiv - Live Nachrichten!' : `❌ ${message}`;
+        status.className = `api-status ${valid ? 'valid' : 'invalid'}`;
+        status.style.display = 'inline-block';
       }
 
-      sendToPerplexity() {
-        const input = document.getElementById('chatInput');
-        const text = input.value.trim();
-        if (!text) return;
-
-        const chat = document.getElementById('chatContainer');
-        const messageDiv = document.createElement('div');
-        messageDiv.className = 'chat-message ai';
-        messageDiv.innerHTML = `
-          <div class="message-bubble">
-            <strong>Perplexity AI:</strong> <em>Analysiere "${this.currentArticle.title}" aus verschiedenen Perspektiven...</em><br>
-            <small>Füge deinen API-Key hinzu: PERPLEXITY_API_KEY=pplx-...</small>
+      openPerplexityModal(id) {
+        this.currentArticle = this.news.find(n => n.id === id);
+        document.getElementById('modalTitle').textContent = `🤖 Analyse: ${this.currentArticle.title}`;
+        document.getElementById('perplexityModal').style.display = 'block';
+        document.getElementById('chatContainer').innerHTML = `
+          <div class="chat-message ai">
+            <div class="message-bubble">
+              <strong>Perplexity AI:</strong> Analysiere <em>"${this.currentArticle.title}"</em><br><br>
+              Füge deinen Perplexity API-Key hinzu:<br><code>PERPLEXITY_API_KEY=pplx-...</code>
+            </div>
           </div>
         `;
-        chat.appendChild(messageDiv);
-        chat.scrollTop = chat.scrollHeight;
-        input.value = '';
       }
     }
 
+    // Global access
+    let portal;
+
+    // Save API Key function
+    function saveApiKey() {
+      portal.saveApiKey();
+    }
+
     // Initialize
-    document.addEventListener('DOMContentLoaded', () => new NewsPortal());
+    document.addEventListener('DOMContentLoaded', () => {
+      portal = new NewsPortal();
+    });
   </script>
 </body>
 </html>
