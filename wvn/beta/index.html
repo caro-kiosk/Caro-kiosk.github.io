@@ -15,7 +15,6 @@
       --text: #e5e9ff;
       --muted: #a0a4c0;
       --border: rgba(255, 255, 255, 0.06);
-      --error: #ef4444;
     }
 
     * { box-sizing: border-box; }
@@ -143,54 +142,6 @@
       margin: 0 auto 2.5rem;
     }
 
-    /* API Key Input */
-    .api-key-section {
-      background: linear-gradient(135deg, rgba(11, 15, 42, 0.9), rgba(5, 7, 24, 0.9));
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 1.5rem;
-      margin-bottom: 2rem;
-      text-align: center;
-    }
-
-    .api-key-input {
-      display: flex;
-      gap: 0.75rem;
-      max-width: 500px;
-      margin: 0 auto 1rem;
-    }
-
-    .api-key-field {
-      flex: 1;
-      padding: 0.85rem 1.1rem;
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      background: rgba(255, 255, 255, 0.03);
-      color: var(--text);
-      font-size: 0.95rem;
-    }
-
-    .api-key-save {
-      padding: 0.85rem 1.5rem;
-      background: linear-gradient(135deg, var(--accent), var(--accent-blue));
-      border: none;
-      border-radius: 12px;
-      color: white;
-      font-weight: 600;
-      cursor: pointer;
-    }
-
-    .api-status {
-      padding: 0.5rem 1rem;
-      border-radius: 20px;
-      font-size: 0.8rem;
-      font-weight: 500;
-      margin-top: 0.5rem;
-    }
-
-    .api-status.valid { background: rgba(34, 197, 94, 0.2); color: #22c55e; }
-    .api-status.invalid { background: rgba(239, 68, 68, 0.2); color: var(--error); }
-
     /* Search */
     .search-box {
       display: flex;
@@ -203,7 +154,38 @@
       box-shadow: 0 18px 60px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(255, 255, 255, 0.02);
     }
 
-    /* News Grid & Cards - identisch wie vorher */
+    .search-input {
+      flex: 1;
+      padding: 0.85rem 1.1rem;
+      border: none;
+      outline: none;
+      background: transparent;
+      color: var(--text);
+      font-size: 0.95rem;
+    }
+
+    .search-input::placeholder { color: var(--muted); }
+
+    .search-button {
+      border: none;
+      padding: 0.85rem 1.3rem;
+      background: linear-gradient(135deg, var(--accent), var(--accent-blue));
+      color: #fff;
+      font-weight: 500;
+      cursor: pointer;
+      font-size: 0.95rem;
+      border-radius: 999px;
+      margin: 0.15rem;
+      box-shadow: 0 0 18px rgba(60, 141, 255, 0.65);
+      transition: transform 0.12s ease-out, box-shadow 0.12s ease-out;
+    }
+
+    .search-button:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 0 24px rgba(60, 141, 255, 0.85), 0 0 45px rgba(127, 90, 240, 0.65);
+    }
+
+    /* News Grid */
     .news-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -241,7 +223,12 @@
 
     .news-card:hover::before { transform: scaleX(1); }
 
-    .news-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1rem; }
+    .news-header { 
+      display: flex; 
+      justify-content: space-between; 
+      align-items: flex-start; 
+      margin-bottom: 1rem; 
+    }
 
     .country-badge {
       padding: 0.3rem 0.8rem;
@@ -291,7 +278,7 @@
     .news-source:hover { text-decoration: underline; }
     .news-date { color: var(--muted); }
 
-    /* Modal - identisch wie vorher */
+    /* Modal */
     .modal {
       display: none;
       position: fixed; top: 0; left: 0;
@@ -396,7 +383,6 @@
       .news-grid { grid-template-columns: 1fr; gap: 1rem; }
       .navbar { padding: 0.75rem 1rem; }
       .nav-links a { margin-left: 0.75rem; font-size: 0.85rem; }
-      .api-key-input { flex-direction: column; }
     }
   </style>
 </head>
@@ -423,20 +409,8 @@
 
       <h1 class="news-title">Nachrichten aus aller Welt</h1>
       <p class="news-subtitle">
-        Live Nachrichten aus 80+ Ländern. Perplexity AI Analysen verfügbar.
+        Live Nachrichten aus Deutschland, BBC, Reuters, SPIEGEL und internationalen Quellen.
       </p>
-
-      <!-- NewsAPI Key Eingabe -->
-      <div class="api-key-section">
-        <div style="margin-bottom: 1rem; font-size: 0.95rem;">
-          NewsAPI Key eingeben (kostenlos bei <a href="https://newsapi.org" target="_blank" style="color: var(--accent-blue);">newsapi.org</a>)
-        </div>
-        <div class="api-key-input">
-          <input type="password" class="api-key-field" id="newsApiKey" placeholder="pplx-your-newsapi-key-here">
-          <button class="api-key-save" onclick="saveApiKey()">Speichern</button>
-        </div>
-        <div id="apiStatus" class="api-status" style="display: none;"></div>
-      </div>
 
       <form class="search-box" id="searchForm">
         <input class="search-input" type="search" id="searchInput" placeholder="Nach Ländern, Themen oder Quellen suchen…">
@@ -445,7 +419,7 @@
     </section>
 
     <section class="news-grid" id="newsGrid">
-      <div class="loading">🔄 Lade aktuelle Nachrichten aus aller Welt...</div>
+      <div class="loading">🔄 Lade aktuelle Nachrichten aus Tagesschau, SPIEGEL, BBC...</div>
     </section>
   </main>
 
@@ -457,7 +431,14 @@
         <button class="modal-close">×</button>
       </div>
       <div class="modal-body">
-        <div class="chat-container" id="chatContainer"></div>
+        <div class="chat-container" id="chatContainer">
+          <div class="chat-message ai">
+            <div class="message-bubble">
+              <strong>Perplexity AI bereit:</strong> Analysiere Nachrichten aus verschiedenen Perspektiven.<br>
+              Füge API-Key hinzu: <code>PERPLEXITY_API_KEY=pplx-...</code>
+            </div>
+          </div>
+        </div>
         <div class="chat-input-container">
           <input type="text" class="chat-input" id="chatInput" placeholder="Frage stellen oder PERPLEXITY_API_KEY=...">
           <button class="analyze-btn" id="analyzeBtn">Analysieren</button>
@@ -472,105 +453,67 @@
         this.news = [];
         this.filteredNews = [];
         this.currentArticle = null;
-        this.apiKey = localStorage.getItem('newsApiKey') || '';
         this.init();
       }
 
       async init() {
-        const keyInput = document.getElementById('newsApiKey');
-        keyInput.value = this.apiKey;
-
-        if (this.apiKey) {
-          await this.fetchNews();
-        } else {
-          this.showNoKeyMessage();
-        }
-        
+        await this.fetchRSSNews();
         this.setupEventListeners();
       }
 
-      async fetchNews() {
+      async fetchRSSNews() {
         const grid = document.getElementById('newsGrid');
-        grid.innerHTML = '<div class="loading">📰 Hole Top-Schlagzeilen aus aller Welt...</div>';
+        grid.innerHTML = '<div class="loading">📰 Verbinde mit Tagesschau, SPIEGEL, BBC, Reuters...</div>';
 
-        try {
-          // Multi-Country NewsAPI Call
-          const countries = 'de,us,gb,fr,es,br,in,au,ca'; // Deutschland, USA, UK, FR, ES, BR, IN, AU, CA
-          const url = `https://newsapi.org/v2/top-headlines?` +
-                     `countries=${countries}&` +
-                     `language=de,en&` +
-                     `pageSize=30&` +
-                     `apiKey=${this.apiKey}`;
+        const feeds = [
+          { url: 'https://www.tagesschau.de/xml/rss2/', country: '🇩🇪' },
+          { url: 'https://www.spiegel.de/schlagzeilen/tops/index.rss', country: '🇩🇪' },
+          { url: 'https://www.faz.net/aktuell/rss/', country: '🇩🇪' },
+          { url: 'https://feeds.reuters.com/reuters/topNews', country: '🌍' },
+          { url: 'https://www.bbc.com/news/rss.xml', country: '🇬🇧' }
+        ];
 
-          const response = await fetch(url);
-          const data = await response.json();
-
-          if (data.status !== 'ok') {
-            throw new Error(data.message || 'API Fehler');
+        const allNews = [];
+        
+        for (const feed of feeds) {
+          try {
+            const response = await fetch(`https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(feed.url)}`);
+            const data = await response.json();
+            
+            data.items.slice(0, 4).forEach(item => {
+              allNews.push({
+                id: item.link + Date.now(),
+                title: item.title,
+                country: feed.country,
+                date: item.pubDate ? new Date(item.pubDate).toLocaleDateString('de-DE') : 'Heute',
+                summary: item.description 
+                  ? item.description.replace(/<[^>]*>/g, '').trim().slice(0, 160) + '...'
+                  : 'Keine Zusammenfassung verfügbar',
+                source: item.source || data.feed.title || 'Unbekannt',
+                category: this.categorizeArticle(item.title),
+                url: item.link
+              });
+            });
+          } catch(e) {
+            console.log(`Feed ${feed.url} konnte nicht geladen werden`);
           }
-
-          this.news = data.articles
-            .filter(article => article.title && article.url) // Nur vollständige Artikel
-            .map(article => ({
-              id: article.url, // Unique ID
-              title: article.title,
-              country: this.getCountryFlag(article.source?.country || 'unknown'),
-              date: article.publishedAt ? new Date(article.publishedAt).toLocaleDateString('de-DE') : 'Heute',
-              summary: article.description?.slice(0, 160) + '...' || 'Keine Zusammenfassung verfügbar',
-              source: article.source?.name || 'Unbekannte Quelle',
-              category: this.categorizeArticle(article.title + ' ' + article.description),
-              url: article.url,
-              image: article.urlToImage || null
-            }))
-            .slice(0, 25); // Top 25
-
-          this.filteredNews = [...this.news];
-          this.renderNews();
-          this.updateApiStatus(true);
-
-        } catch (error) {
-          console.error('NewsAPI Fehler:', error);
-          grid.innerHTML = `
-            <div class="loading" style="color: var(--error);">
-              ❌ API-Fehler: ${error.message}<br>
-              <small>Überprüfe deinen NewsAPI Key bei <a href="https://newsapi.org" target="_blank" style="color: var(--accent-blue);">newsapi.org</a></small>
-            </div>
-          `;
-          this.updateApiStatus(false, error.message);
         }
+
+        this.news = allNews.slice(0, 25);
+        this.filteredNews = [...this.news];
+        this.renderNews();
       }
 
-      getCountryFlag(country) {
-        const flags = {
-          'de': '🇩🇪', 'us': '🇺🇸', 'gb': '🇬🇧', 'fr': '🇫🇷',
-          'es': '🇪🇸', 'br': '🇧🇷', 'in': '🇮🇳', 'au': '🇦🇺',
-          'ca': '🇨🇦', 'unknown': '🌍'
-        };
-        return flags[country?.toLowerCase()] || '🌍';
-      }
-
-      categorizeArticle(text) {
-        const lower = text.toLowerCase();
-        if (lower.includes('wirtschaft') || lower.includes('economy') || lower.includes('geld')) return 'wirtschaft';
-        if (lower.includes('tech') || lower.includes('technologie')) return 'technologie';
-        if (lower.includes('politik') || lower.includes('government')) return 'politik';
+      categorizeArticle(title) {
+        const t = title.toLowerCase();
+        if (t.includes('wirtschaft') || t.includes('economy') || t.includes('börse')) return 'wirtschaft';
+        if (t.includes('technik') || t.includes('tech') || t.includes('digital')) return 'technologie';
+        if (t.includes('politik') || t.includes('wahl') || t.includes('regierung')) return 'politik';
         return 'welt';
       }
 
-      showNoKeyMessage() {
-        document.getElementById('newsGrid').innerHTML = `
-          <div class="loading">
-            🔑 Bitte NewsAPI Key eingeben<br>
-            <small>1. Gehe zu <a href="https://newsapi.org" target="_blank" style="color: var(--accent-blue);">newsapi.org</a><br>
-            2. Kostenlos registrieren (1000 Anfragen/Tag)<br>
-            3. API Key hier einfügen &amp; Speichern
-            </small>
-          </div>
-        `;
-      }
-
       setupEventListeners() {
-        // Navigation
+        // Navigation Filter
         document.querySelectorAll('.nav-links a[data-filter]').forEach(link => {
           link.addEventListener('click', (e) => {
             e.preventDefault();
@@ -580,26 +523,30 @@
           });
         });
 
-        // Search
+        // Suche
         document.getElementById('searchInput').addEventListener('input', (e) => {
           this.searchNews(e.target.value);
         });
 
-        // API Key Save
-        document.getElementById('newsApiKey').addEventListener('keypress', (e) => {
-          if (e.key === 'Enter') this.saveApiKey();
+        // Perplexity Modal
+        document.addEventListener('click', (e) => {
+          if (e.target.classList.contains('debate-btn')) {
+            const card = e.target.closest('.news-card');
+            this.openPerplexityModal(card.dataset.id);
+          }
         });
-      }
 
-      async saveApiKey() {
-        const key = document.getElementById('newsApiKey').value.trim();
-        if (!key) return;
+        document.querySelector('.modal-close').addEventListener('click', () => {
+          document.getElementById('perplexityModal').style.display = 'none';
+        });
 
-        localStorage.setItem('newsApiKey', key);
-        this.apiKey = key;
-        document.getElementById('apiStatus').style.display = 'none';
-        
-        await this.fetchNews();
+        document.getElementById('analyzeBtn').addEventListener('click', () => {
+          this.sendToPerplexity();
+        });
+
+        document.getElementById('chatInput').addEventListener('keypress', (e) => {
+          if (e.key === 'Enter') this.sendToPerplexity();
+        });
       }
 
       filterNews(category) {
@@ -619,7 +566,8 @@
           this.filteredNews = this.news.filter(n =>
             n.title.toLowerCase().includes(q) ||
             n.summary.toLowerCase().includes(q) ||
-            n.source.toLowerCase().includes(q)
+            n.source.toLowerCase().includes(q) ||
+            n.country.toLowerCase().includes(q)
           );
         }
         this.renderNews();
@@ -628,15 +576,15 @@
       renderNews() {
         const grid = document.getElementById('newsGrid');
         if (!this.filteredNews.length) {
-          grid.innerHTML = '<div class="loading">Keine Nachrichten gefunden</div>';
+          grid.innerHTML = '<div class="loading">Keine Nachrichten gefunden 😔</div>';
           return;
         }
 
         grid.innerHTML = this.filteredNews.map(article => `
           <article class="news-card" data-id="${article.id}">
             <div class="news-header">
-              <span class="country-badge">${article.country} ${article.source}</span>
-              <button class="debate-btn" onclick="portal.openPerplexityModal('${article.id}')">🤖 AI</button>
+              <span class="country-badge">${article.country}</span>
+              <button class="debate-btn">🤖 AI-Analyse</button>
             </div>
             <h3 class="news-title">${article.title}</h3>
             <p class="news-summary">${article.summary}</p>
@@ -648,39 +596,46 @@
         `).join('');
       }
 
-      updateApiStatus(valid, message = '') {
-        const status = document.getElementById('apiStatus');
-        status.textContent = valid ? '✅ API-Key aktiv - Live Nachrichten!' : `❌ ${message}`;
-        status.className = `api-status ${valid ? 'valid' : 'invalid'}`;
-        status.style.display = 'inline-block';
-      }
-
       openPerplexityModal(id) {
         this.currentArticle = this.news.find(n => n.id === id);
         document.getElementById('modalTitle').textContent = `🤖 Analyse: ${this.currentArticle.title}`;
         document.getElementById('perplexityModal').style.display = 'block';
-        document.getElementById('chatContainer').innerHTML = `
+        
+        const chat = document.getElementById('chatContainer');
+        chat.innerHTML = `
           <div class="chat-message ai">
             <div class="message-bubble">
-              <strong>Perplexity AI:</strong> Analysiere <em>"${this.currentArticle.title}"</em><br><br>
-              Füge deinen Perplexity API-Key hinzu:<br><code>PERPLEXITY_API_KEY=pplx-...</code>
+              <strong>Perplexity AI:</strong> Bereit zur Analyse von:<br>
+              <em>"${this.currentArticle.title}"</em><br><br>
+              <code>PERPLEXITY_API_KEY=pplx-dein-key-hier</code>
             </div>
           </div>
         `;
       }
+
+      sendToPerplexity() {
+        const input = document.getElementById('chatInput');
+        const text = input.value.trim();
+        if (!text) return;
+
+        const chat = document.getElementById('chatContainer');
+        const message = document.createElement('div');
+        message.className = 'chat-message ai';
+        message.innerHTML = `
+          <div class="message-bubble">
+            <strong>Perplexity AI:</strong> Analysiere "${this.currentArticle.title}"...<br>
+            <small>API-Key erforderlich: PERPLEXITY_API_KEY=pplx-...</small>
+          </div>
+        `;
+        chat.appendChild(message);
+        chat.scrollTop = chat.scrollHeight;
+        input.value = '';
+      }
     }
 
-    // Global access
-    let portal;
-
-    // Save API Key function
-    function saveApiKey() {
-      portal.saveApiKey();
-    }
-
-    // Initialize
+    // Initialisierung
     document.addEventListener('DOMContentLoaded', () => {
-      portal = new NewsPortal();
+      new NewsPortal();
     });
   </script>
 </body>
