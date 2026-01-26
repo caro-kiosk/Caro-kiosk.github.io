@@ -1,1 +1,22 @@
-
+[
+  {
+    "id": 1,
+    "title": "Lula gewinnt brasilianische Präsidentschaftswahl",
+    "country": "🇧🇷 Brasilien",
+    "date": "2026-01-20",
+    "summary": "Luiz Inácio Lula da Silva besiegt Bolsonaro-Nachfolger",
+    "source": "Folha de S.Paulo",
+    "url": "https://www.folha.uol.com.br",
+    "category": "Politik"
+  },
+  {
+    "id": 2,
+    "title": "Deutschland führt CO2-Steuer ein",
+    "country": "🇩🇪 Deutschland", 
+    "date": "2026-01-25",
+    "summary": "Neue Klimasteuer ab 2027",
+    "source": "Frankfurter Allgemeine Zeitung",
+    "url": "https://www.faz.net",
+    "category": "Umwelt"
+  }
+]
