@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nachrichten aus aller Welt - Internationale Berichterstattung</title>
+    <meta name="description" content="Seröse Nachrichten aus aller Welt mit Quellenangaben und Perplexity AI Analyse.">
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📰</text></svg>">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-top">
+                <div class="logo">
+                    <h1>📰 Nachrichten aus aller Welt</h1>
+                    <span class="subtitle">Internationale Berichterstattung</span>
+                </div>
+                <div class="header-right">
+                    <span class="live-indicator">LIVE</span>
+                    <div class="search-box">
+                        <input type="text" id="search" placeholder="Suche nach Ländern, Themen...">
+                        <button class="search-btn">🔍</button>
+                    </div>
+                </div>
+            </div>
+            <nav class="navbar">
+                <ul>
+                    <li><a href="#" class="nav-link active" data-filter="all">Alle Nachrichten</a></li>
+                    <li><a href="#" class="nav-link" data-filter="politik">Politik</a></li>
+                    <li><a href="#" class="nav-link" data-filter="wirtschaft">Wirtschaft</a></li>
+                    <li><a href="#" class="nav-link" data-filter="welt">Welt</a></li>
+                    <li><a href="#" class="nav-link" data-filter="technik">Technik</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <!-- Top Stories -->
+            <section class="top-stories">
+                <h2 class="section-title">Top-Meldungen</h2>
+                <div class="top-stories-grid" id="top-stories">
+                    <!-- Dynamisch gefüllt -->
+                </div>
+            </section>
+
+            <!-- Latest News -->
+            <section class="latest-news">
+                <h2 class="section-title">Neueste Nachrichten <span class="count"></span></h2>
+                <div class="news-grid" id="news-grid">
+                    <div class="loading">Nachrichten werden geladen...</div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Perplexity Debate Modal -->
+    <div id="debate-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modal-title">AI-Analyse starten</h3>
+                <button class="modal-close">×</button>
+            </div>
+            <div class="modal-body">
+                <div class="news-preview">
+                    <h4 id="modal-news-title"></h4>
+                    <p id="modal-news-source"></p>
+                </div>
+                <div class="perplexity-chat" id="perplexity-chat">
+                    <div class="chat-message ai">
+                        <p><strong>Perplexity AI:</strong> Ich kann diese Nachricht aus verschiedenen Perspektiven analysieren. 
+                        Füge deinen <strong>Perplexity API Key</strong> ein oder schreibe <code>PERPLEXITY_API_KEY=pxx-...</code></p>
+                    </div>
+                </div>
+                <div class="chat-input">
+                    <input type="text" id="chat-input" placeholder="Deine Frage oder PERPLEXITY_API_KEY=...">
+                    <button id="analyze-btn">Analysieren</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <h3>📰 Nachrichten aus aller Welt</h3>
+                    <p>Seröse Berichterstattung aus internationalen Quellen mit vollständiger Quellenangabe.</p>
+                </div>
+                <div class="footer-links">
+                    <a href="data/articles.json">Alle Artikel (JSON)</a>
+                    <a href="#" onclick="alert('RSS Feed kommt bald!')">RSS Feed</a>
+                    <a href="#" onclick="openImpressum()">Impressum</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Nachrichten aus aller Welt. Alle Rechte vorbehalten. <a href="data/articles.json">Quellen</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
