@@ -1,1 +1,34 @@
-
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perplexity Debatte</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body class="debate-page">
+    <div class="debate-container">
+        <div class="debate-header">
+            <button onclick="window.parent.closeDebateModal()" class="back-btn">← Zurück</button>
+            <h2 id="debate-title">Nachrichtentitel</h2>
+        </div>
+        
+        <div class="chat-container" id="chat-container">
+            <div class="chat-message ai-message">
+                <div class="message-bubble">
+                    <strong>Perplexity AI:</strong> Ich analysiere diese Nachricht aus 5 politischen Perspektiven:<br>
+                    1. Liberal<br>2. Sozialdemokratisch<br>3. Konservativ<br>4. Ökologisch<br>5. National<br><br>
+                    Lade API-Schlüssel oder klicke "Analysieren"...
+                </div>
+            </div>
+        </div>
+        
+        <div class="chat-input-container">
+            <input type="text" id="chat-input" placeholder="Deine Frage zur Nachricht... (oder PERPLEXITY_API_KEY=xxx)">
+            <button id="send-btn" class="send-btn">Analysieren</button>
+        </div>
+    </div>
+    
+    <script src="../js/perplexity.js"></script>
+</body>
+</html>
