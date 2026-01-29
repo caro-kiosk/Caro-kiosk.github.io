@@ -6,6 +6,8 @@ The unofficial website of the Caro Kiosk. We try to create the best experience f
 
 -Recently added a wiki.
 -Restrucured article handeling inside the wiki
+-Added youtube whidghed support inside articles
+-Debugged minor scrolling issues
 
 # Structure
 <br>
