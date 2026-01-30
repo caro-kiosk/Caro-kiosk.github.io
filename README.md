@@ -9,6 +9,6 @@ The unofficial website of the Caro Kiosk. We try to create the best experience f
 -Added youtube whidghed support inside articles
 -Debugged minor scrolling issues
 
-#Credits
+# Credits
 
 well add this later on :)
