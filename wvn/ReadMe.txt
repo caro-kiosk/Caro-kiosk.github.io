@@ -1,3 +1,6 @@
+maybe a tool wich gathers articles of other newspapers via rss
+
+
 📁 worldview-news/
 ├── index.html           # ✅ Hauptseite
 ├── debate.html          # ✅ Perplexity Chat
