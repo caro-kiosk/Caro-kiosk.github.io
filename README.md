@@ -2,12 +2,12 @@
 
 The unofficial website of the Caro Kiosk. We try to create the best experience for you, for us, and for the whole community. Take a look at our work [here](https://caro-kiosk.github.io/).
 
-# UPDATE NEWS
+# UPDATE NEWS (V1.0.1)
 
--Recently added a wiki.
--Restrucured article handeling inside the wiki
--Added youtube whidghed support inside articles
--Debugged minor scrolling issues
+-Recently added a wiki.<br>
+-Restrucured article handeling inside the wiki<br>
+-Added youtube whidghed support inside articles<br>
+-Debugged minor scrolling issues<br>
 
 # TO - Do for commiing Updates
 
