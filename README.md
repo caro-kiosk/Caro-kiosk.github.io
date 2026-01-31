@@ -13,8 +13,8 @@ The unofficial website of the Caro Kiosk. We try to create the best experience f
 
 -Creating guide page for article generation (inside the Wiki)<br>
 -Adding more articles to the wiki<br>
--Setting up credits, contributors and community page
+-Setting up credits, contributors and community pages
 
 # Credits
 
-well add this later on :)
+we'll add this later on :)
