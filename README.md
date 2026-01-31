@@ -9,7 +9,7 @@ The unofficial website of the Caro Kiosk. We try to create the best experience f
 -Added youtube whidghed support inside articles<br>
 -Debugged minor scrolling issues<br>
 
-# TO - Do for commiing Updates
+# TO - Do for coming updates
 
 -Creating guide page for article generation (inside the Wiki)<br>
 -Adding more articles to the wiki<br>
