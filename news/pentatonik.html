@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <title>Caro News</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      background: linear-gradient(135deg, #191e33 0%, #04205a 100%);
+      color: #f5f5ff;
+      font-family: 'Inter', Arial, sans-serif;
+      margin: 0;
+      min-height: 100vh;
+      display: flex; flex-direction: column; align-items: center;
+    }
+    .article {
+      max-width: 700px; margin: 38px 0;
+      background: #161e33;
+      padding: 38px 22px 32px 22px;
+      border-radius: 14px;
+      box-shadow: 0 10px 40px #04205a44;
+    }
+    .hero-image {
+      width: 100%; max-height: 330px; object-fit: cover;
+      border-radius: 11px;
+      margin-bottom: 25px;
+      background: #242c50;
+      display: block;
+    }
+    h1 { font-size:2rem; color:#59a2ff; margin:0 0 8px 0;}
+    h2 { font-size:1.4rem; color:#82b1ff; margin:28px 0 12px 0;}
+    h3 { font-size:1.25rem; color:#b3d4ef; margin:22px 0 10px 0;}
+    .meta { font-size: 1.05rem; color: #b3d4ef; margin-bottom: 18px;}
+    p { font-size: 1.12rem; line-height: 1.66; margin: 18px 0;}
+    table { 
+      width: 100%; 
+      border-collapse: collapse; 
+      margin: 20px 0; 
+      background: #242c50; 
+      border-radius: 8px; 
+      overflow: hidden;
+    }
+    th, td { 
+      padding: 12px 14px; 
+      text-align: left; 
+      border-bottom: 1px solid #35416a; 
+    }
+    th { 
+      background: #59a2ff; 
+      color: #0f141f; 
+      font-weight: 700; 
+    }
+    ul { margin: 12px 0; padding-left: 22px; }
+    li { margin: 8px 0; }
+    .article-img { max-width: 100%; border-radius: 9px; margin: 16px 0; background: #23273e;}
+    a {color: #82b1ff;}
+    @media (max-width: 600px) {
+      .article { padding:13px 2vw 24px 2vw;}
+      h1{font-size:1.36rem;}
+      table { font-size: 0.95rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="article">
+    <img src="/assets/xmast_2025.png" alt="Pentatonik Illustration" class="hero-image" />
+    <h1>Die Pentatonik -<br>fünf Töne die die Welt verbinden</h1>
+    <div class="meta">Feb 02, 2026 · By Alex</div>
+    
+    <p>Hallo zusammen, heute möchte ich euch die Pentatonik vorstellen. Wenn ihr an Musik denkt, habt ihr vielleicht zuerst Dur und Moll im Kopf – also unsere „klassischen" Tonleitern mit sieben Tönen. Die Pentatonik funktioniert anders: Sie besteht aus <strong>fünf</strong> statt von sieben Tönen pro Oktave. Trotzdem – oder gerade deshalb – kommt sie in unglaublich vielen Kulturen vor, von Afrika über Asien bis zu Blues und Rock.</p>
+
+    <h2>Die Besonderheiten der Pentatonik</h2>
+    <p>In den üblichen Dur- und Moll-Pentatoniken fehlen alle Halbtonschritte, also die kleinsten Abstände, die oft Spannung oder „schiefe" Töne erzeugen. Dadurch klingen fast alle Töne dieser Skala miteinander relativ harmonisch, man hat kaum wirklich „falsche" Töne. Das macht pentatonische Melodien besonders eingängig, leicht zu singen und sehr geeignet für Menschen, die ohne große Theorie einfach musizieren wollen.</p>
+    <p>Ein anschauliches Beispiel: Spielt ihr auf dem Klavier nur die schwarzen Tasten, bekommt ihr bereits eine pentatonische Tonleiter. So simpel – und trotzdem die Basis unzähliger Songs und Volkslieder.</p>
+
+    <h2>Chromatische vs. pentatonische Tonleiter</h2>
+    <p>Um die Pentatonik besser zu verstehen, vergleichen wir sie mit der <strong>chromatischen Tonleiter</strong>, die in Europa Standard ist:</p>
+    
+    <table>
+      <tr>
+        <th>Aspekt</th>
+        <th>Chromatische Tonleiter</th>
+        <th>Pentatonische Tonleiter</th>
+      </tr>
+      <tr>
+        <td><strong>Anzahl Töne</strong></td>
+        <td>12 (alle Halbtöne: C-C#-D-D#...)</td>
+        <td>5 (z. B. C-D-E-G-A)</td>
+      </tr>
+      <tr>
+        <td><strong>Abstände</strong></td>
+        <td>Nur Halbtonschritte</td>
+        <td>Ganzton/Terz (keine Halbtöne)</td>
+      </tr>
+      <tr>
+        <td><strong>Klang</strong></td>
+        <td>Spannungsreich, dissonant</td>
+        <td>Harmonisch, „sicher"</td>
+      </tr>
+      <tr>
+        <td><strong>Beispiel</strong></td>
+        <td>C-C#-D-D#-E-F-F#-G...</td>
+        <td>C-D-E-G-A (Dur-Pentatonik)</td>
+      </tr>
+    </table>
+
+    <h3>Warum sich die eine durchgesetzt hat</h3>
+    <p><strong>Pentatonik:</strong> Ideal für mündliche Kulturen (Afrika, Asien), Volksmusik und Improvisation (Blues/Rock). Wenige Töne = leicht merkbar, einfach zu stimmen, vielseitig einsetzbar.</p>
+    <p><strong>Chromatik/Dur-Moll:</strong> Passt zu schriftlicher Musiktradition Europas, Polyphonie (Mehrstimmigkeit) und funktionaler Harmonie (Bach, Beethoven). 12 Töne erlauben komplexe Modulationen und Spannungs-Auflösungen.</p>
+
+    <h2>Die Pentatonik weltweit</h2>
+    <p>Pentatonische Tonleitern sind kein seltenes Phänomen, sondern eine der ältesten und am weitesten verbreiteten musikalischen „Ideen" der Menschheit. Man trifft sie an vielen Orten der Welt, auch im Alltag, ohne es oft zu bemerken:</p>
+    <ul>
+      <li>In traditioneller Musik vieler afrikanischer Regionen</li>
+      <li>In asiatischer Musik (z. B. China, Japan)</li>
+      <li>In europäischer Volksmusik (z. B. Bretagne, Balkan)</li>
+      <li>In afroamerikanischer Musik, Blues, Spirituals und später Rock</li>
+    </ul>
+    <p>Fünftönige Systeme spielen in vielen Kulturen eine wichtige Rolle. Neben vier-, sechs- oder siebentönigen Skalen gehört die Pentatonik oft zu den Standard-Bausteinen des Tonsystems. Musik dient Ritualen, Festen und Erzähltraditionen – pentatonische Melodien sind leicht mitzusingen und funktionieren gut in Gruppen.</p>
+    <p>Instrumente mit pentatonischen Tonleitern sind einfacher zu bauen und zu stimmen – Xylophone (Balafon), Lamellophone (Mbira) oder Harfen brauchen keine komplizierten chromatischen Halbtöne. Lokale Materialien lassen sich perfekt darauf abstimmen.</p>
+
+    <h2>Die anhemitonische Pentatonik</h2>
+    <p>Die <strong>anhemitonische Pentatonik</strong> (fünftönige Musik ohne Halbtöne) folgt aufwärts der Tonfolge <strong>C-D-E-G-A</strong> (C-Dur-Pentatonik). Sie wird in vielen Bereichen genutzt – von Kinderliedern über afrikanische Musik bis zu Werbespots. <strong>Warum?</strong> Weil sie super einfach zu singen und mit Instrumenten umzusetzen ist und die Töne fast immer harmonisch zusammenpassen.</p>
+
+    <p>Thank you for accompanying us on our journey!</p>
+    <p>Back to <a href="/newspaper">all articles</a></p>
+  </div>
+</body>
+</html>
