@@ -1,0 +1,14 @@
+templates usage is defined in the [wiki]
+
+use the tables lime this: 
+
+<table>
+  <tr>
+    <th>Line1</th>
+    <th>Line2</th>
+  </tr>
+  <tr>
+    <td>Zeile1</td>
+    <td>Zeile2</td>
+  </tr>
+</table>
