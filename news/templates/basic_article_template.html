@@ -33,9 +33,32 @@
     p { font-size: 1.12rem; line-height: 1.66; margin: 18px 0;}
     img.article-img { max-width: 100%; border-radius: 9px; margin: 16px 0; background: #23273e;}
     a {color: #82b1ff;}
+    table { 
+      width: 100%; 
+      border-collapse: collapse; 
+      margin: 20px 0; 
+      background: #242c50; 
+      border-radius: 8px; 
+      overflow: hidden;
+      font-size: 1rem;
+    }
+    th, td { 
+      padding: 12px 14px; 
+      text-align: left; 
+      border-bottom: 1px solid #35416a; 
+    }
+    th { 
+      background: #59a2ff; 
+      color: #0f141f; 
+      font-weight: 700; 
+    }
+    tr:nth-child(even) td { background: #2a3550; }
+    tr:hover td { background: #3a4560; }
     @media (max-width: 600px) {
       .article { padding:13px 2vw 24px 2vw;}
       h1{font-size:1.36rem;}
+      table { font-size: 0.9rem; }
+      th, td { padding: 8px 10px; }
     }
   </style>
 </head>
