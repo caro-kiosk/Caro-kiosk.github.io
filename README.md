@@ -4,7 +4,10 @@ The unofficial website of the Caro Kiosk. We try to create the best experience f
 
 # Project Status
 The Project is currently PAUSED
-because of internal limitations. You can still access the website as well as the sourcecode. If you intend to contribute to this project you can contact us here [here](https://discord.gg/fe5Jyv9pxt). We hope that we'll be able to continue with developing this site. cya!
+
+(because of internal limitations.) You can still access the website as well as the sourcecode. If you intend to contribute to this project you can contact us [here](https://discord.gg/fe5Jyv9pxt). We hope that we'll be able to continue with developing this site. cya!
+
+-The Caro-Kiosk dev Team
 
 # UPDATE NEWS (V1.0.1)
 
